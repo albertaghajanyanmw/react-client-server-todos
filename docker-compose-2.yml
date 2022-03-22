@@ -1,0 +1,32 @@
+version: '3.3'
+
+services:
+  ui:
+    build: ./ui
+    # uncomment network_mode variable to be able to run docker in localhost
+    network_mode: host
+    # ports:
+      # - '3000:3000'
+      # - '80:80'
+      # - '443:443'
+    # volumes:
+    #  - /opt/<projectName>/certs:/etc/nginx/certs
+    #  - /opt/<projectName>/logs/ui:/usr/src/app/log
+    environment:
+     - NODE_ENV=production
+  server:
+    build: ./server
+    # uncomment network_mode variable to be able to run docker in localhost
+    network_mode: host
+    # volumes:
+      #  - /opt/<projectName>/logs/server:/usr/src/app/log
+    # ports:
+      #  - '4000:4000'
+    environment:
+       DATABASE_HOST: ''
+       DATABASE_PASSWORD: ''
+       DATABASE_NAME: ''
+       DATABASE_USERNAME: ''
+
+volumes:
+  db_data: {}

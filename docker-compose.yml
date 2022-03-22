@@ -1,0 +1,29 @@
+version: '3.3'
+
+services:
+  server:
+    container_name: server-service
+    restart: always
+    build: ./server
+    # uncomment network_mode variable to be able to run docker in localhost
+    network_mode: host
+    # ports:
+        # - "4000:4000"
+    environment:
+       DATABASE_HOST: ''
+       DATABASE_PASSWORD: ''
+       DATABASE_NAME: ''
+       DATABASE_USERNAME: ''
+  ui:
+    container_name: client-service
+    build: ./client
+    # uncomment network_mode variable to be able to run docker in localhost
+    # network_mode: host
+    ports:
+      - "80:80"
+    environment:
+     - NODE_ENV=development
+    depends_on:
+    - server
+volumes:
+  db_data: {}
