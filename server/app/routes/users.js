@@ -8,5 +8,4 @@ module.exports = (app) => {
     app.route('/users/:id').get(verifyLoginToken, users.getUser);
     app.route('/users/:id/notifications/subscribe').put(users.notificationsSubscribe);
     app.route('/users/:id/firebase/token').put(users.updateFirebaseToken);
-    app.route('/user').post(users.create);
 };

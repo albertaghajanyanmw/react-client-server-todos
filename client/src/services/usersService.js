@@ -10,10 +10,6 @@ export default {
     const options = { url: apiEndpoints.user.replace(':userId', id)};
     return get(options);
   },
-  createUser: async (data) => {
-    const options = { url: `${apiEndpoints.register}`, data};
-    return post(options);
-  },
   sendFirebaseToken: async (id, data) => {
     const options = { url: apiEndpoints.updateFirebaseToken.replace(':userId', id), data};
     return put(options);

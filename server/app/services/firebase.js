@@ -76,7 +76,7 @@ module.exports.sendSubscriptionNotification = (title, body, subscription, webpus
       description: body
     })
     webpush.sendNotification(subscription, payload)
-      .then(result => console.log())
+      .then(result => console.log(result))
       .catch(e => {
           console.log("\n\n\n err = ", e)
         })

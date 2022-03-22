@@ -5,7 +5,7 @@ import { Button, Box, Paper, Grid, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
 import M from 'messages';
-import usersService from 'services/usersService';
+import authService from 'services/authService';
 import { routes } from 'configs';
 import CustomForm from 'components/form';
 import { formOptions } from './config/config';
@@ -28,7 +28,7 @@ const RegistrationPage = () => {
     validationSchema,
     onSubmit: async (values) => {
       try {
-        await usersService.createUser(values);
+        await authService.register(values);
         toast.success(M.get('actionMsg.success.create'));
         history.push(routes.login.path);
       } catch (error) {

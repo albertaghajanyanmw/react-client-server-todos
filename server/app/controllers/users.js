@@ -35,34 +35,6 @@ module.exports.getUser = async (req, res) => {
         });
 };
 
-module.exports.create = async (req, res) => {
-    const payload = { ...req.body };
-    const { isValid, data: userData } = isSchemeValidSync(usersValidator.createUser, payload);
-    if (!isValid) {
-        return res.status(400).json({ message: 'validation failed' });
-    }
-    Users.findOne({ where: { email: req.body.email } })
-        .then(async exist => {
-            if (exist) {
-                return res.status(409).send("Email already exists");
-            }
-            if (payload.password) {
-                userData.passwordHash = await crypt.hash(payload.password);
-                delete userData.password;
-            }
-            Users.create(userData).then(async (createdUser) => {
-                if (createdUser) {
-                    return res.json({ user: createdUser, message: 'User has been created.' });
-                }
-            }).catch(err => {
-                return res.status(500).json({ message: 'Error in create user' });
-            });
-        })
-        .catch(err => {
-            return res.status(500).json({ message: 'validation error' });
-        });
-};
-
 module.exports.notificationsSubscribe = async (req, res) => {
     try {
         const user = await Users.findByPk(req.params.id);

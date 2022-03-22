@@ -51,8 +51,13 @@ module.exports = (sequelize, DataTypes) => {
         isActive: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
-            defaultValue: true,
+            defaultValue: false,
             field: 'is_active'
+        },
+        activationLink: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            field: 'activation_link'
         },
         phone: {
             type: DataTypes.STRING(255),

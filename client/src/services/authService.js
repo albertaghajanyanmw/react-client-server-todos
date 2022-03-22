@@ -35,6 +35,10 @@ export default {
       return Promise.reject(message);
     });
   },
+  register: async (data) => {
+    const options = { url: `${apiEndpoints.register}`, data};
+    return post(options);
+  },
   logOut: () => {
     localStorage.clear();
     cookie.remove(AUTH_TOKEN);

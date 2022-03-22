@@ -1,6 +1,6 @@
 'use strict';
 const { Op } = require('sequelize');
-const {StatusCodes} = require('http-status-codes');
+const {StatusCodes: {INTERNAL_SERVER_ERROR}} = require('http-status-codes');
 const { users: Users, tasks: Tasks } = require('../models');
 const responseBuilder = require('../helpers/errorResponseBodyBuilder');
 const { isSchemeValidSync } = require('../helpers/validate');
@@ -16,7 +16,7 @@ module.exports.getTasks = async (req, res) => {
         return res.json({ count: count, data: rows });
     } catch(err) {
         return res
-            .status(StatusCodes.INTERNAL_SERVER_ERROR)
+            .status(INTERNAL_SERVER_ERROR)
             .json(responseBuilder.couldNotGetCriteria(CONSTANTS.TypeNames.TASKS.toLowerCase()));
     }
 };
@@ -27,7 +27,7 @@ module.exports.getTask = async (req, res) => {
         return res.json(task);
     } catch {
         return res
-        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .status(INTERNAL_SERVER_ERROR)
         .json(responseBuilder.couldNotGetCriteria(CONSTANTS.TypeNames.TASK.toLowerCase()));
     }
 };
@@ -43,7 +43,7 @@ module.exports.create = async (req, res) => {
         return res.json({ task: createdTask, message: 'Task has been created.' });
     } catch(err) {
         return res
-            .status(StatusCodes.INTERNAL_SERVER_ERROR)
+            .status(INTERNAL_SERVER_ERROR)
             .json(responseBuilder.couldNotAddCriteria(CONSTANTS.TypeNames.TASK.toLowerCase()));
     }
 };
@@ -61,7 +61,7 @@ module.exports.update = async (req, res) => {
         return res.json({ task: updatedTask, message: 'Task has been updated.' });
     } catch(err) {
         return res
-            .status(StatusCodes.INTERNAL_SERVER_ERROR)
+            .status(INTERNAL_SERVER_ERROR)
             .json(responseBuilder.couldNotUpdateCriteria(CONSTANTS.TypeNames.TASK.toLowerCase()));
     }
 };
@@ -76,6 +76,6 @@ module.exports.delete = async (req, res) => {
         await Tasks.destroy({ where: { id: req.params.id, userId: req.user.id }});
         return res.json({ message: 'Task has been deleted.' });
     } catch(err) {
-        return res.status(500).json({ message: 'Error to delete new task.' });
+        return res.status(INTERNAL_SERVER_ERROR).json({ message: 'Error to delete new task.' });
     }
 };

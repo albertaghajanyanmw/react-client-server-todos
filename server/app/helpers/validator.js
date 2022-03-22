@@ -1,4 +1,4 @@
-const {BAD_REQUEST} = require('http-status-codes');
+const {StatusCodes: {BAD_REQUEST}} = require('http-status-codes');
 
 const {ResponseError} = require('./ResponseError');
 

@@ -18,7 +18,7 @@ import { dateFormat, getMessage } from 'helpers/helper';
 import { adaptTodoTableData } from 'helpers/adapter';
 
 import PageTitle from './PageTitle';
-import { fetchTodoList, updateFilterStatus, createTodo, setParams, deleteTodo, updateTodo } from './todosSlice';
+import { fetchTodoList, updateFilterStatus, createTodo, setParams, deleteTodo, updateTodo, clearData } from './todosSlice';
 import { validationSchema } from './validation';
 import { options, addTodoOptions, tableOptions } from './config/config.js';
 import styles from './styles';
@@ -54,6 +54,12 @@ const TodoList = () => {
       fetchData(filteredParams);
     }
   }, [filteredParams, status, fetchData, filterStatus]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearData());
+    };
+  }, []);
 
   const clearModeAndCloseModal = () => {
     setMode({isEdit: false, currentTodo: {}});

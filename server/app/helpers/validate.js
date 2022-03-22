@@ -1,4 +1,3 @@
-'use strict';
 const AJV = require('ajv').default;
 const ajvFormats = require('ajv-formats');
 const ajvKeywords = require('ajv-keywords');

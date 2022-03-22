@@ -80,6 +80,11 @@ const todoSlice = createSlice({
       state.params = action.payload;
       state.status = 'waiting';
     },
+    clearData: (state) => {
+      state.status = 'waiting';
+      state.todoList = [];
+      state.count = 0;
+    },
   },
   extraReducers(builder) {
     builder
@@ -139,7 +144,7 @@ const todoSlice = createSlice({
   },
 });
 
-export const { updateFilterStatus, setParams } = todoSlice.actions;
+export const { updateFilterStatus, setParams, clearData } = todoSlice.actions;
 
 
 export const selectAllTodoList = (state) => state.todoState.todoList;

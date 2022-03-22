@@ -39,8 +39,9 @@ module.exports = {
       password: {
         type: Sequelize.STRING,
         validate: {
-            notEmpty: true
-        }      },
+          notEmpty: true
+        }
+      },
       last_login: {
         type: Sequelize.DATE
       },
@@ -61,6 +62,11 @@ module.exports = {
         allowNull: false,
         defaultValue: true,
         field: 'is_active'
+      },
+      activationLink: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        field: 'activation_link'
       },
       phone: {
         type: Sequelize.STRING(255),
