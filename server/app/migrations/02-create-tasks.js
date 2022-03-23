@@ -1,7 +1,4 @@
-'use strict';
 const { CONSTANTS } = require('../constants/Constants');
-const crypt = require('../helpers/crypt');
-const PASSWORD_EXPIRE_DAYS = 90;
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {

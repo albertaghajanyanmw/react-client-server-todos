@@ -1,2 +1,0 @@
-move firebase.json file in the server and delete from sources
-update firebase.json path in usages

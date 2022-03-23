@@ -1,4 +1,3 @@
-'use strict';
 const PASSWORD_EXPIRE_DAYS = 90;
 
 module.exports = {

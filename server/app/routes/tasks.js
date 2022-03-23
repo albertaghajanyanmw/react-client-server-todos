@@ -1,5 +1,3 @@
-'use strict';
-
 const tasks = require('../controllers/tasks');
 const {verifyLoginToken} = require('../helpers/validateToken');
 

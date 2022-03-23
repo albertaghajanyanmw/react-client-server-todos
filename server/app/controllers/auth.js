@@ -1,17 +1,13 @@
-'use strict';
 const jwt = require('jsonwebtoken');
-const crypt = require('../helpers/crypt');
-const {CONSTANTS} = require('../constants/Constants');
-const config = require('../config/env-settings.json');
-const { mailSettings, apiUrl, clientUrl } = require('../settings');
-const { isSchemeValidSync } = require('../helpers/validate');
-const { users: usersValidator } = require('../schemes');
-const {
-    users: Users,
-    sequelize,
-} = require('../models');
 const uuid = require('uuid');
+const crypt = require('../helpers/crypt');
 const mailService = require('../services/mailService');
+const config = require('../config/env-settings.json');
+const { apiUrl, clientUrl } = require('../settings');
+const { users: Users, sequelize } = require('../models');
+const { users: usersValidator } = require('../schemes');
+const { isSchemeValidSync } = require('../helpers/validate');
+const {CONSTANTS} = require('../constants/Constants');
 
 module.exports.postLogin = async (request, response) => {
     try {

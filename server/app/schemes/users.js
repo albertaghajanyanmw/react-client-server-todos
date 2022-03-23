@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
     getUser: {
         user: {
@@ -52,7 +50,6 @@ module.exports = {
             isActive: {
                 type: 'boolean'
             },
-            // Validators maxLength, minLength or regexp ?
             password:{
                 type: 'string',
             }

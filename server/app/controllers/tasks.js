@@ -1,12 +1,10 @@
-'use strict';
-const { Op } = require('sequelize');
 const {StatusCodes: {INTERNAL_SERVER_ERROR}} = require('http-status-codes');
-const { users: Users, tasks: Tasks } = require('../models');
 const responseBuilder = require('../helpers/errorResponseBodyBuilder');
-const { isSchemeValidSync } = require('../helpers/validate');
-const {CONSTANTS} = require('../constants/Constants');
-const { tasks: tasksValidator } = require('../schemes');
 const { getListPayload } = require('./common');
+const { users: Users, tasks: Tasks } = require('../models');
+const { isSchemeValidSync } = require('../helpers/validate');
+const { tasks: tasksValidator } = require('../schemes');
+const {CONSTANTS} = require('../constants/Constants');
 
 module.exports.getTasks = async (req, res) => {
     try {

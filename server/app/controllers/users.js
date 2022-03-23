@@ -1,11 +1,6 @@
-'use strict';
-const { Op } = require('sequelize');
-const {StatusCodes, getReasonPhrase} = require('http-status-codes');
-const {
-    users: Users,
-    tasks: Tasks
-} = require('../models');
-const crypt = require('../helpers/crypt');
+
+const {StatusCodes} = require('http-status-codes');
+const { users: Users, tasks: Tasks } = require('../models');
 const { isSchemeValidSync } = require('../helpers/validate');
 const { users: usersValidator } = require('../schemes');
 const responseBuilder = require('../helpers/errorResponseBodyBuilder');
