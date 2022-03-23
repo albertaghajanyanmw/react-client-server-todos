@@ -37,11 +37,6 @@ module.exports.notificationsSubscribe = async (req, res) => {
             return res.status(401).json({ message: 'User not found' });
         }
         const payload = { ...req.body };
-        console.log("\n\n\n payload = ", payload)
-        // const { isValid, data: userData } = isSchemeValidSync(usersValidator.subscribe, payload);
-        // if (!isValid) {
-        //     return res.status(400).json({ message: 'validation failed' });
-        // }
         const updatedUser = await Users.update({firebaseSubscription: JSON.stringify(payload)}, { where: { id: user.id } } );
         return res.json({ user: updatedUser, message: 'User has been subscribed.' });
     } catch(err) {
@@ -56,9 +51,7 @@ module.exports.updateFirebaseToken = async (req, res) => {
             return res.status(401).json({ message: 'User not found' });
         }
         const payload = { ...req.body };
-        console.log("\n\n\n payload = ", payload)
         const { isValid, data: userData } = isSchemeValidSync(usersValidator.updateFirebaseToken, payload);
-        console.log("\n\n\n userData = ", userData)
         if (!isValid) {
             return res.status(400).json({ message: 'validation failed' });
         }

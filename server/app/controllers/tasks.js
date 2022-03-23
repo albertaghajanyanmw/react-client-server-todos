@@ -1,10 +1,11 @@
 const {StatusCodes: {INTERNAL_SERVER_ERROR}} = require('http-status-codes');
 const responseBuilder = require('../helpers/errorResponseBodyBuilder');
 const { getListPayload } = require('./common');
-const { users: Users, tasks: Tasks } = require('../models');
+const { users: Users, tasks: Tasks, sequelize } = require('../models');
 const { isSchemeValidSync } = require('../helpers/validate');
 const { tasks: tasksValidator } = require('../schemes');
 const {CONSTANTS} = require('../constants/Constants');
+const notificationService = require('../services/notificationService');
 
 module.exports.getTasks = async (req, res) => {
     try {
@@ -31,15 +32,31 @@ module.exports.getTask = async (req, res) => {
 };
 
 module.exports.create = async (req, res) => {
+    let transaction;
     try {
         const payload = { ...req.body, userId: req.user.id };
         const { isValid, errors, data: taskData } = isSchemeValidSync(tasksValidator.createTask, payload);
         if (!isValid) {
             return res.status(400).json({ message: 'Validation failed.', errors });
         }
-        const createdTask = await Tasks.create(taskData);
+        transaction = await sequelize.transaction();
+        const createdTask = await Tasks.create(taskData, { transaction });
+
+        const user = req.user;
+        const firebaseToken = user.firebaseToken;
+        const messagePayload = {
+            title: `Created Todo.`,
+            body: `
+                Hi ${user.firstName}. New todo was created.\n
+                { ID: ${createdTask.id}, NAME: ${createdTask.name} }`,
+        };
+        await notificationService.sendFCMNotification(messagePayload.title, messagePayload.body, firebaseToken);
+        await transaction.commit();
         return res.json({ task: createdTask, message: 'Task has been created.' });
     } catch(err) {
+        if (transaction) {
+            transaction.rollback();
+        }
         return res
             .status(INTERNAL_SERVER_ERROR)
             .json(responseBuilder.couldNotAddCriteria(CONSTANTS.TypeNames.TASK.toLowerCase()));

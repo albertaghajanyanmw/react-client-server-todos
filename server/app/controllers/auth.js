@@ -25,7 +25,10 @@ module.exports.postLogin = async (request, response) => {
                 id: user.id,
                 email: user.email,
                 is_active: user.is_active,
-                created_date: user.created_date
+                created_date: user.created_date,
+                firebaseToken: user.firebaseToken,
+                firstName: user.firstName,
+                lastName: user.lastName
             },
             config.loginSecretKey,
             {expiresIn: CONSTANTS.LOGIN_TOKEN_EXPiRE_DATE}

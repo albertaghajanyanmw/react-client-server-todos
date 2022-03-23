@@ -11,7 +11,7 @@ const sendFCMMessage = async (user, task) => {
                 Hi ${user.dataValues.firstName}. You have an expired todo.\n
                 { ID: ${task.dataValues.id}, NAME: ${task.dataValues.name} }`,
         };
-        const res = notificationService.sendFCMNotification(payload.title, payload.body, firebaseToken);
+        const res = await notificationService.sendFCMNotification(payload.title, payload.body, firebaseToken);
         return res;
     } catch (error) {
         console.error('sendFCMNotification error...\n', error);
