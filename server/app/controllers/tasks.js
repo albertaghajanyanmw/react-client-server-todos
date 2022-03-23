@@ -41,17 +41,15 @@ module.exports.create = async (req, res) => {
         }
         transaction = await sequelize.transaction();
         const createdTask = await Tasks.create(taskData, { transaction });
-
-        const user = req.user;
+        // send push notification (todo: separate to generic service)
+        const user = await Users.findByPk(req.user.id);
         const firebaseToken = user.firebaseToken;
         const messagePayload = {
             title: `Created Todo.`,
-            body: `
-                Hi ${user.firstName}. New todo was created.\n
-                { ID: ${createdTask.id}, NAME: ${createdTask.name} }`,
+            body: ` Hi ${user.firstName}. New todo.\n { ID: ${createdTask.id}, NAME: ${createdTask.name} }`
         };
-        await notificationService.sendFCMNotification(messagePayload.title, messagePayload.body, firebaseToken);
         await transaction.commit();
+        notificationService.sendFCMNotification(messagePayload.title, messagePayload.body, firebaseToken);
         return res.json({ task: createdTask, message: 'Task has been created.' });
     } catch(err) {
         if (transaction) {

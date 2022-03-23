@@ -34,7 +34,7 @@ class NotificationService {
                 });
                 resolve(res);
             } catch(err) {
-                console.log("Could not sent push notification. Error\n ", err)
+                console.log("\n\n\n Could not sent push notification. Error\n ", err, "\n\n")
             }
         });
     }
