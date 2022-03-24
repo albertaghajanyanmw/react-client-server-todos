@@ -1,5 +1,5 @@
 const admin = require('firebase-admin');
-const { firebase: { key } } = require('../settings');
+const { firebase: { key } } = require('settings');
 const serviceAccount = require(key);
 
 class NotificationService {

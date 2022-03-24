@@ -1,13 +1,12 @@
 const jwt = require('jsonwebtoken');
 const uuid = require('uuid');
-const crypt = require('../helpers/crypt');
-const mailService = require('../services/mailService');
-const config = require('../config/env-settings.json');
-const { apiUrl, clientUrl } = require('../settings');
-const { users: Users, sequelize } = require('../models');
-const { users: usersValidator } = require('../schemes');
-const { isSchemeValidSync } = require('../helpers/validate');
-const {CONSTANTS} = require('../constants/Constants');
+const crypt = require('helpers/crypt');
+const mailService = require('services/mailService');
+const { loginSecretKey, apiUrl, clientUrl } = require('settings');
+const { users: Users, sequelize } = require('models');
+const { users: usersValidator } = require('schemes');
+const { isSchemeValidSync } = require('helpers/validate');
+const {CONSTANTS} = require('constants/Constants');
 
 module.exports.postLogin = async (request, response) => {
     try {
@@ -30,7 +29,7 @@ module.exports.postLogin = async (request, response) => {
                 firstName: user.firstName,
                 lastName: user.lastName
             },
-            config.loginSecretKey,
+            loginSecretKey,
             {expiresIn: CONSTANTS.LOGIN_TOKEN_EXPiRE_DATE}
         );
         return response.header(CONSTANTS.AUTHORIZATION, token).json({ success: true, token: token, ...user.dataValues });

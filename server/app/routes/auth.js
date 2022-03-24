@@ -1,4 +1,4 @@
-const auth = require('../controllers/auth');
+const auth = require('controllers/auth');
 
 module.exports = (app) => {
     app.route('/auth/login').post(auth.postLogin);

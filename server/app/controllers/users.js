@@ -1,10 +1,10 @@
 
 const {StatusCodes} = require('http-status-codes');
-const { users: Users, tasks: Tasks } = require('../models');
-const { isSchemeValidSync } = require('../helpers/validate');
-const { users: usersValidator } = require('../schemes');
-const responseBuilder = require('../helpers/errorResponseBodyBuilder');
-const {CONSTANTS} = require('../constants/Constants');
+const { users: Users, tasks: Tasks } = require('models');
+const { isSchemeValidSync } = require('helpers/validate');
+const { users: usersValidator } = require('schemes');
+const responseBuilder = require('helpers/errorResponseBodyBuilder');
+const {CONSTANTS} = require('constants/Constants');
 
 module.exports.getUsers = async (req, res) => {
     return Users.findAndCountAll({include: [{model: Tasks}]})

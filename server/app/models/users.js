@@ -1,4 +1,4 @@
-const crypt = require('../helpers/crypt');
+const crypt = require('helpers/crypt');
 const PASSWORD_EXPIRE_DAYS = 90;
 
 module.exports = (sequelize, DataTypes) => {

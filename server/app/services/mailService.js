@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-const { mailSettings } = require('../settings');
+const { mailSettings } = require('settings');
 class MailService {
 
     constructor() {

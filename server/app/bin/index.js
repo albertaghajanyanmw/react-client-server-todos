@@ -2,10 +2,10 @@ require('app-module-path').addPath(`${__dirname}/../`);
 
 const http = require('http');
 
-const settings = require('../settings');
+const settings = require('settings');
+const models = require('models');
+const DBMigration = require('migrations');
 const app = require('../../server.js');
-const models = require('../models');
-const DBMigration = require('../migrations');
 
 /**
  * Get port and store in express

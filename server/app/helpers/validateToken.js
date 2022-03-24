@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 const jwtDecode = require('jwt-decode');
 const {StatusCodes, getReasonPhrase} = require('http-status-codes');
-const {CONSTANTS} = require('../constants/Constants');
-const loginSecretKey = require('../config/env-settings.json').loginSecretKey;
+const {CONSTANTS} = require('constants/Constants');
+const { loginSecretKey } = require('settings');
 
 const verifyToken = async (request, response, next, token, secret) => {
     try {

@@ -1,11 +1,11 @@
 const {StatusCodes: {INTERNAL_SERVER_ERROR}} = require('http-status-codes');
-const responseBuilder = require('../helpers/errorResponseBodyBuilder');
+const responseBuilder = require('helpers/errorResponseBodyBuilder');
+const { users: Users, tasks: Tasks, sequelize } = require('models');
+const { isSchemeValidSync } = require('helpers/validate');
+const { tasks: tasksValidator } = require('schemes');
+const {CONSTANTS} = require('constants/Constants');
+const notificationService = require('services/notificationService');
 const { getListPayload } = require('./common');
-const { users: Users, tasks: Tasks, sequelize } = require('../models');
-const { isSchemeValidSync } = require('../helpers/validate');
-const { tasks: tasksValidator } = require('../schemes');
-const {CONSTANTS} = require('../constants/Constants');
-const notificationService = require('../services/notificationService');
 
 module.exports.getTasks = async (req, res) => {
     try {

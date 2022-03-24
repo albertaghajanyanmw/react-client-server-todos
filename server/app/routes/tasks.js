@@ -1,5 +1,5 @@
-const tasks = require('../controllers/tasks');
-const {verifyLoginToken} = require('../helpers/validateToken');
+const tasks = require('controllers/tasks');
+const {verifyLoginToken} = require('helpers/validateToken');
 
 module.exports = (app) => {
     app.route('/tasks').get(verifyLoginToken, tasks.getTasks);

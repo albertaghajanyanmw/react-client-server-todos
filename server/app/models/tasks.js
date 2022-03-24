@@ -1,4 +1,4 @@
-const { CONSTANTS } = require('../constants/Constants');
+const { CONSTANTS } = require('constants/Constants');
 
 module.exports = (sequelize, DataTypes) => {
     const fields = {

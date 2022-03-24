@@ -1,5 +1,5 @@
-const users = require('../controllers/users');
-const {verifyLoginToken} = require('../helpers/validateToken');
+const users = require('controllers/users');
+const {verifyLoginToken} = require('helpers/validateToken');
 
 module.exports = (app) => {
     app.route('/users').get(verifyLoginToken, users.getUsers);
