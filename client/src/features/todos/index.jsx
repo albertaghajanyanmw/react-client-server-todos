@@ -24,7 +24,6 @@ import { options, addTodoOptions, tableOptions } from './config/config.js';
 import styles from './styles';
 import CircularIndeterminate from 'components/loading/Loading';
 import { askForPermissionToReceiveNotifications } from '../../firebase/pushNotification';
-import { subscribeUser } from '../../firebase/subscription';
 import NotificationButton from './NotificationButton';
 
 const TodoList = () => {
@@ -199,49 +198,50 @@ const TodoList = () => {
 
 
   return (
-    <Grid className={classes.root} container spacing={3} direction="row">
-      <Grid item xs={8}>
-        <NotificationButton handleClick={askForPermissionToReceiveNotifications} text="Ask push permission"/>
-        <NotificationButton handleClick={subscribeUser} text="Subscribe"/>
-        <div className={classes.root__container}>
-            <div className={classes.stickyHeader}>
-              <PageTitle>{M.get('todo.title')}</PageTitle>
-                <div className={classes.root__actionContent}>
-                  <Grid container>
-                    <Grid item xs={12} sm={6}>
-                      <CustomButton text={M.get('todo.addTodo')} onClick={handleOpen} variant="contained" />
-                      <CustomDialog handleSubmit={formik.handleSubmit} open={open} handleClose={memoHandleClose} title={M.get('todo.modal.title')} description={M.get('todo.modal.description')}>
-                        {memoDialogContent}
-                      </CustomDialog>
+    <>
+      <NotificationButton handleClick={askForPermissionToReceiveNotifications} text="Ask push permission"/>
+      <Grid className={classes.root} container spacing={3} direction="row">
+        <Grid item xs={8}>
+          <div className={classes.root__container}>
+              <div className={classes.stickyHeader}>
+                <PageTitle>{M.get('todo.title')}</PageTitle>
+                  <div className={classes.root__actionContent}>
+                    <Grid container>
+                      <Grid item xs={12} sm={6}>
+                        <CustomButton text={M.get('todo.addTodo')} onClick={handleOpen} variant="contained" />
+                        <CustomDialog handleSubmit={formik.handleSubmit} open={open} handleClose={memoHandleClose} title={M.get('todo.modal.title')} description={M.get('todo.modal.description')}>
+                          {memoDialogContent}
+                        </CustomDialog>
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <SelectButton title={options.selectTitle} options={memoizedOptions} value={filterStatus} setValue={updateFilter} />
+                      </Grid>
                     </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <SelectButton title={options.selectTitle} options={memoizedOptions} value={filterStatus} setValue={updateFilter} />
-                    </Grid>
-                  </Grid>
 
-                </div>
+                  </div>
 
-            </div>
-          <Grid item xs={12}>
-            <Box mt={3} className={classes.tableRoot}>
-              <div className={classes.tabsContainer}>
-                <CustomTable
-                  tableSources={memoTableSource}
-                  tableOptions={memoTableOptions}
-                  loading={status === 'loading'}
-                  filteredParams={filteredParams}
-                  setFilteredParams={setFilteredParams}
-                  handleEditAction={handleEdit}
-                  handleDeleteAction={handleDelete}
-                  handleRowClick={handleCheck}
-                  toolbarView={toolbarView}
-                />
               </div>
-            </Box>
-          </Grid>
-      </div>
+            <Grid item xs={12}>
+              <Box mt={3} className={classes.tableRoot}>
+                <div className={classes.tabsContainer}>
+                  <CustomTable
+                    tableSources={memoTableSource}
+                    tableOptions={memoTableOptions}
+                    loading={status === 'loading'}
+                    filteredParams={filteredParams}
+                    setFilteredParams={setFilteredParams}
+                    handleEditAction={handleEdit}
+                    handleDeleteAction={handleDelete}
+                    handleRowClick={handleCheck}
+                    toolbarView={toolbarView}
+                  />
+                </div>
+              </Box>
+            </Grid>
+        </div>
+        </Grid>
       </Grid>
-    </Grid>
+    </>
   );
 };
 

@@ -12,6 +12,7 @@ import './index.css';
 import { store } from './store/store';
 
 initializeFirebase();
+// askForPermissionToReceiveNotifications();
 
 ReactDOM.render(
   <React.StrictMode>

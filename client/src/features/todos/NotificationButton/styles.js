@@ -4,7 +4,7 @@ import { findByLabelText } from "@testing-library/react";
 export default (theme) => ({
     btnContainer: {
         display: 'flex',
-        margin: 20
+        margin: '80px 20px 0 20px'
     },
 });
 

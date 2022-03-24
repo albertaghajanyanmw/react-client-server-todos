@@ -17,7 +17,7 @@ import { routes } from 'configs/index';
 import './App.css';
 import { Toaster } from 'react-hot-toast';
 import CircularIndeterminate from 'components/loading/Loading';
-// import { askForPermissionToReceiveNotifications } from './firebase';
+import { askForPermissionToReceiveNotifications } from 'firebase/pushNotification';
 
 // pages
 // const LoginPage = React.lazy(() => import('features/auth/login'));
@@ -36,13 +36,13 @@ function App() {
   const history = useHistory();
   setupInterceptors(history);
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => askForPermissionToReceiveNotifications(), 2000);
-
-  //   return () => {
-  //     return () => clearTimeout(timer);
-  //   };
-  // }, []);
+  // save token in the server
+  useEffect(() => {
+    const timer = setTimeout(() => askForPermissionToReceiveNotifications(), 3000);
+    return () => {
+      return () => clearTimeout(timer);
+    };
+  }, []);
 
   return (
     <div className={classNames(classes.root, 'App')}>
