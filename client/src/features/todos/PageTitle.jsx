@@ -8,9 +8,9 @@ function PageTitle({ children, ...rest }) {
   const classes = useStyles();
 
   return (
-    <p className={classes.page__title} {...rest}>
+    <div className={classes.pageTitle} {...rest}>
       {children}
-    </p>
+    </div>
   );
 }
 

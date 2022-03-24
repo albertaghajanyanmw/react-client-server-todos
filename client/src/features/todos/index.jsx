@@ -124,7 +124,7 @@ const TodoList = () => {
   const memoDialogContent = useMemo(() => {
     return (
       (
-        <Box className={classes.todo__modal}>
+        <Box className={classes.todoModal}>
           <form onSubmit={formik.handleSubmit}>
             <Grid container spacing={4}>
               <CustomForm inputs={addTodoOptions.inputs} formik={formik} />
@@ -198,29 +198,21 @@ const TodoList = () => {
 
 
   return (
-    <>
+    <Box className={classes.root}>
       <NotificationButton handleClick={askForPermissionToReceiveNotifications} text="Ask push permission"/>
-      <Grid className={classes.root} container spacing={3} direction="row">
-        <Grid item xs={8}>
-          <div className={classes.root__container}>
-              <div className={classes.stickyHeader}>
-                <PageTitle>{M.get('todo.title')}</PageTitle>
-                  <div className={classes.root__actionContent}>
-                    <Grid container>
-                      <Grid item xs={12} sm={6}>
-                        <CustomButton text={M.get('todo.addTodo')} onClick={handleOpen} variant="contained" />
-                        <CustomDialog handleSubmit={formik.handleSubmit} open={open} handleClose={memoHandleClose} title={M.get('todo.modal.title')} description={M.get('todo.modal.description')}>
-                          {memoDialogContent}
-                        </CustomDialog>
-                      </Grid>
-                      <Grid item xs={12} sm={6}>
-                        <SelectButton title={options.selectTitle} options={memoizedOptions} value={filterStatus} setValue={updateFilter} />
-                      </Grid>
-                    </Grid>
-
-                  </div>
-
+      <Grid container className={classes.rootGrid} direction="row">
+        <Grid item xs={12}>
+          <div className={classes.rootContainer}>
+            <div className={classes.pageHeader}>
+              <PageTitle>{M.get('todo.title')}</PageTitle>
+              <div className={classes.pageAction}>
+                <CustomButton text={M.get('todo.addTodo')} onClick={handleOpen} variant="contained" />
+                <CustomDialog handleSubmit={formik.handleSubmit} open={open} handleClose={memoHandleClose} title={M.get('todo.modal.title')} description={M.get('todo.modal.description')}>
+                  {memoDialogContent}
+                </CustomDialog>
+                <SelectButton title={options.selectTitle} options={memoizedOptions} value={filterStatus} setValue={updateFilter} />
               </div>
+            </div>
             <Grid item xs={12}>
               <Box mt={3} className={classes.tableRoot}>
                 <div className={classes.tabsContainer}>
@@ -238,10 +230,10 @@ const TodoList = () => {
                 </div>
               </Box>
             </Grid>
-        </div>
+          </div>
         </Grid>
       </Grid>
-    </>
+    </Box>
   );
 };
 

@@ -1,7 +1,6 @@
 export default (theme) => ({
   table: {
     minWidth: 460,
-    // tableLayout: 'fixed',
   },
   tableBody: {
     display: 'flex',

@@ -3,12 +3,29 @@ import { variables } from "configs";
 // todo: add and using all variables from theme
 export default (theme) => ({
   root: {
-    display: 'flex',
-    justifyContent: 'center',
     minHeight: `calc(100vh - ${variables.headerHeight} - 40px)`,
+    borderRadius: 'unset',
+    flexGrow: 1,
+    display: 'block',
+    textAlign: 'start',
+    padding: '24px 32px',
   },
-  root__container: {
+  rootGrid: {
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  rootContainer: {
     width: '100%'
+  },
+  pageAction: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    [theme.breakpoints.down(700)]: {
+      display: 'block',
+      '& > *': {
+        margin: '0 0 30px 0'
+    }
+    }
   },
   stickyHeader: {
     position: 'sticky',
@@ -18,11 +35,11 @@ export default (theme) => ({
     paddingBottom: 20,
     borderRadius: 4
   },
-  root__actionContent: {
+  rootActionContent: {
     display: 'flex',
     justifyContent: 'space-around',
   },
-  todo__modal: {
+  todoModal: {
     padding: 0,
     margin: 'auto',
     marginTop: '7%',
@@ -32,10 +49,7 @@ export default (theme) => ({
   todoContent: {
     display: 'block'
   },
-  todoContent__paper: {
-    padding: '10px',
-  },
-  page__title: {
+  pageTitle: {
     display: 'inline-block',
     width: '100%',
     fontFamily: 'Poppins',

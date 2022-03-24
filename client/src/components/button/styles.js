@@ -4,15 +4,15 @@ import { grey } from "@mui/material/colors";
 export default (theme) => ({
     btn: {
         minHeight: 56,
-        [theme.breakpoints.down(600)]: {
+        width: 200,
+        [theme.breakpoints.down(700)]: {
             width: '100%',
-            marginBottom: 20
         }
     },
     selectBox: {
         maxWidth: 200,
-        [theme.breakpoints.down(600)]: {
-            marginTop: 20,
+        minWidth: 200,
+        [theme.breakpoints.down(700)]: {
             maxWidth: '100%'
         }
     },
