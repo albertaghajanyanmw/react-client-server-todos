@@ -18,7 +18,7 @@ const adaptUsersTableData = (data) => {
   return dataList;
 };
 
-const createTodoTableData = (id, name, expireDate, expireDateOrg, status) => ({ id, name, expireDate, expireDateOrg, status });
+const createTodoTableData = (id, name, estimatedDate, estimatedDateOrg, status) => ({ id, name, estimatedDate, estimatedDateOrg, status });
 
 const adaptTodoTableData = (data) => {
   const dataList = [];
@@ -27,8 +27,8 @@ const adaptTodoTableData = (data) => {
       createTodoTableData(
         item.id,
         item.name,
-        item.expireDate ? dateFormat(item.expireDate, 'DD/MM/YYYY, HH:mm') : '-',
-        item.expireDate,
+        item.estimatedDate ? dateFormat(item.estimatedDate, 'DD/MM/YYYY, HH:mm') : '-',
+        item.estimatedDate,
         item.status,
       )
     );

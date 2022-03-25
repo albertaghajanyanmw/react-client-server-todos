@@ -6,14 +6,6 @@ export default (theme) => ({
     display: 'flex',
     justifyContent: 'center'
   },
-  skeletonContainer: {
-    display: 'flex'
-  },
-  skeletonItem: {
-    minWidth: '100%',
-    height: '40px',
-    margin: '10px'
-  },
   tableCellAction: {
     padding: '6px 16px',
     textAlign: 'center',

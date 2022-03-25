@@ -21,7 +21,7 @@ const sendFCMMessage = async (user, task) => {
 const checkExpiredTasks = async () => {
     try {
         const condition = {
-            expireDate: { [Op.lte]: new Date(Date.now() - (0.1 * 60 * 60 * 1000)) }
+            estimatedDate: { [Op.lte]: new Date(Date.now() - (0.1 * 60 * 60 * 1000)) }
         };
         const tasks = await Tasks.findAll(
             {
@@ -84,7 +84,7 @@ module.exports = {
 // const checkExpiredTasks = async () => {
 //     try {
 //         const condition = {
-//             expireDate: { [Op.lte]: new Date(Date.now() - (0.1 * 60 * 60 * 1000)) }
+//             expirestimatedDateeDate: { [Op.lte]: new Date(Date.now() - (0.1 * 60 * 60 * 1000)) }
 //         };
 //         const tasks = await Tasks.findAll(
 //             {

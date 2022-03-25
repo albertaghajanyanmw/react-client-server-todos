@@ -89,17 +89,17 @@ const TodoList = () => {
   }
 
   const formik = useFormik({
-    initialValues: { name: '', expireDate: '' },
+    initialValues: { name: '', estimatedDate: '' },
     validationSchema,
     enableReinitialize: true,
     onSubmit: async (values, {resetForm}) => {
       try {
         clearModeAndCloseModal();
         if (mode.isEdit) {
-          dispatch(updateTodo({...mode.currentTodo, name: values.name, expireDate: values.expireDate || null}));
+          dispatch(updateTodo({...mode.currentTodo, name: values.name, estimatedDate: values.estimatedDate || null}));
           return;
         }
-        await backgroundSyncOrRequest({name: values.name, expireDate: values.expireDate || null});
+        await backgroundSyncOrRequest({name: values.name, estimatedDate: values.estimatedDate || null});
         resetForm();
       } catch (err) {
         toast.error(getMessage(err?.response?.data, 'error'));
@@ -148,7 +148,7 @@ const TodoList = () => {
 
   const handleEdit = useCallback(
     (todo) => {
-      const itemValues = { name: todo.name, expireDate: todo.expireDateOrg ? dateFormat(new Date(todo.expireDateOrg), "YYYY-MM-DDTHH:mm") : '' };
+      const itemValues = { name: todo.name, estimatedDate: todo.estimatedDateOrg ? dateFormat(new Date(todo.estimatedDateOrg), "YYYY-MM-DDTHH:mm") : '' };
       formik.setValues(itemValues);
       handleOpen();
       setMode({isEdit: true, currentTodo: todo});

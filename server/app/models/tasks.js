@@ -18,10 +18,10 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true,
             field: 'description'
           },
-          expireDate: {
+          estimatedDate: {
             type: DataTypes.DATE,
             allowNull: true,
-            field: 'expire_date'
+            field: 'estimated_date'
           },
           archived: {
             type: DataTypes.BOOLEAN,

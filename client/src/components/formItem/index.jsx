@@ -19,13 +19,11 @@ const CustomFormItem = ({ input, formik }) => {
         return (
           <Grid item xs={12}>
             <TextField
+              {...item}
               classes={{ root: classes.item }}
               fullWidth
               variant={item.variant}
               id={item.id}
-              name={item.name}
-              type={item.type}
-              label={item.label}
               value={formik.values[item.name]}
               onChange={formik.handleChange}
               error={formik.touched[item.name] && Boolean(formik.errors[item.name])}
@@ -44,9 +42,7 @@ const CustomFormItem = ({ input, formik }) => {
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DateTimePicker
                     id={item.id}
-                    name={item.name}
-                    type={item.type}
-                    label={item.label}
+                    {...item}
                     value={formik.values[item.name]}
                     error={item.required && formik.touched[item.name] && Boolean(formik.errors[item.name])}
                     helperText={formik.touched[item.name] && formik.errors[item.name]}
@@ -65,10 +61,7 @@ const CustomFormItem = ({ input, formik }) => {
               fullWidth
               classes={{ root: classes.item }}
               className={classes.item}
-              variant={item.variant}
-              id={item.id}
-              name={item.name}
-              label={item.label}
+              {...item}
               value={formik.values[item.name]}
               onChange={formik.handleChange}
               error={

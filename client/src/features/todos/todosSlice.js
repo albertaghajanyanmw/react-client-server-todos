@@ -47,7 +47,7 @@ export const updateTodo = createAsyncThunk(
       name: data.name,
       description: data.description,
       status: data.status,
-      expireDate: data.expireDate,
+      estimatedDate: data.estimatedDate,
     }
     const response = await todoService.updateTodo(id, filteredData);
     return response.data.task;

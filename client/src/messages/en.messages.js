@@ -41,12 +41,12 @@ const en = {
       description: 'Fill the todo details.',
       id: 'ID',
       name: 'Name',
-      expireDate: 'Expire date',
+      estimatedDate: 'Expire date',
       status: 'Status'
     },
     noTodos: 'No Todos',
     sortByStatus: 'Sort by status',
-    sortByExpireDate: 'Sort by expire date'
+    sortByEstimatedDate: 'Sort by estimated date'
   },
   table: {
     noResult: 'No result'

@@ -6,7 +6,7 @@ module.exports = {
             name: {type: 'string', maxLength: 255 },
             description: {type: ['string', 'null'], maxLength: 255 },
             status: {type: 'string', maxLength: 255 },
-            expireDate: {type: ['string', 'null'], maxLength: 255 },
+            estimatedDate: {type: ['string', 'null'], maxLength: 255 },
         },
         required: [],
         additionalProperties: false
@@ -15,10 +15,10 @@ module.exports = {
         properties: {
             name: { type: 'string', maxLength: 255 },
             description: { type: 'string', maxLength: 255 },
-            expireDate: { type: ['string', 'null'], maxLength: 255 },
+            estimatedDate: { type: ['string', 'null'], maxLength: 255 },
             userId: { type: 'number', maxLength: 10 },
         },
-        // required: ['name', 'expireDate'],
+        // required: ['name', 'estimatedDate'],
         required: ['name'],
         additionalProperties: false
     },

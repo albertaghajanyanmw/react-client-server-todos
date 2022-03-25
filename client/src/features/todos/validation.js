@@ -4,7 +4,7 @@ const validationSchema = yup.object({
   name: yup
     .string('Enter todo name.')
     .required('Name is required.'),
-  expireDate: yup
+  estimatedDate: yup
     .string('Enter todo expire date.')
     .nullable()
 });

@@ -14,7 +14,6 @@ import M from 'messages';
 import CustomTableHead from './customTableHead';
 import CustomTableCell from './customTableCell';
 import styles from './styles';
-import moment from 'moment';
 import { Tooltip } from '@mui/material';
 
 const useStyles = makeStyles(styles);
@@ -63,92 +62,87 @@ function CustomTable({
     setFilteredParams(newFilter);
   };
 
-  const collectSkeletonContainer = fields.map(fld => (
-    <Skeleton key={fld.id} className={classes.skeletonItem} animation="pulse" />
-  ));
-
   const isCompleted = (row) => row.status === 'completed';
-  // const isInprogress = (row) => row.status === 'inprogress';
-  // const isExpired = (row) => row.expireDateOrg && moment(row.expireDateOrg).isBefore(new Date());
 
   const renderCustomTableCell = useMemo(() => {
     return (
-      tableData?.map((row) => {
-        return loading ? (<td key={row.id}>{collectSkeletonContainer}</td>) :
-          (
-            <Tooltip key={row[rowUniqueKey]} title={M.get('actions.changeStatus')}>
-              <TableRow
-                onClick={() => handleRowClick(row)}
-                hover={row.isDoorOpened === undefined}
-                key={row[rowUniqueKey]}
-                className={classNames(classes.tableRow, {
-                    [classes.rowSuccess]: isCompleted(row),
-                    // [classes.rowInprogress]: isInprogress(row) && !isExpired(row),
-                    // [classes.rowError]: isExpired(row),
-                  })
-                }
-              >
-                {fields.map((item) =>
-                  (<CustomTableCell
-                    key={item.id}
-                    handleClickIcon={handleClickIcon}
-                    cellItem={item}
-                    data={row}
-                    filteredParams={filteredParams}
-                  />)
-                )}
-                {handleEditAction &&
-                  <CustomTableCell
-                    key={`${row[rowUniqueKey]}-edit`}
-                    handleClickIcon={handleEditAction}
-                    data={row}
-                    isEditAction
-                  />
-                }
-                {handleDeleteAction &&
-                  <CustomTableCell
-                    key={`${row[rowUniqueKey]}-delete`}
-                    handleClickIcon={handleDeleteAction}
-                    data={row}
-                    isDeleteAction
-                  />
-                }
-              </TableRow>
-            </Tooltip>
-          );
-      })
-    )
+      tableData?.map((row) => (
+        <Tooltip key={row[rowUniqueKey]} title={M.get('actions.changeStatus')}>
+          <TableRow
+            onClick={() => handleRowClick(row)}
+            hover={row.isDoorOpened === undefined}
+            key={row[rowUniqueKey]}
+            className={classNames(classes.tableRow, {
+                [classes.rowSuccess]: isCompleted(row),
+              })
+            }
+          >
+            {fields.map((item) =>
+              (<CustomTableCell
+                key={item.id}
+                handleClickIcon={handleClickIcon}
+                cellItem={item}
+                data={row}
+                filteredParams={filteredParams}
+              />)
+            )}
+            {handleEditAction &&
+              <CustomTableCell
+                key={`${row[rowUniqueKey]}-edit`}
+                handleClickIcon={handleEditAction}
+                data={row}
+                isEditAction
+              />
+            }
+            {handleDeleteAction &&
+              <CustomTableCell
+                key={`${row[rowUniqueKey]}-delete`}
+                handleClickIcon={handleDeleteAction}
+                data={row}
+                isDeleteAction
+              />
+            }
+          </TableRow>
+        </Tooltip>))
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fields, collectSkeletonContainer, tableData, handleClickIcon, handleEditAction]);
+  )}, [fields, tableData, handleClickIcon, handleEditAction]);
 
   return (
     <div>
       <Paper>
-        <TableContainer>
-          {toolbarView && toolbarView}
-          <Table className={classes.table} size="small" padding="checkbox">
-              <CustomTableHead
-                sortObj={sortObj}
-                onRequestSort={tableData?.length > 0 ? handleRequestSort : null}
-                rowCount={tableData?.length}
-                fields={fields}
-                filteredParams={filteredParams}
-                withEditAction={!!tableData?.length && handleEditAction ? true : false}
-                withDeleteAction={!!tableData?.length && handleDeleteAction ? true : false}
-              />
-            <TableBody className={loading ? classes.tableBody : ''}>
-                {renderCustomTableCell}
-                {!tableData?.length &&  (
-                  <TableRow style={{ height: 60 }}>
-                    <CustomTableCell
-                      isEmptyCell
-                      loading={loading}
-                    />
-                  </TableRow>
-                )}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        {
+          loading ? (
+            <div>
+              <Skeleton height="80px" width="100%" animation="pulse" />
+              <Skeleton height="200px" width="100%" animation="pulse" />
+            </div>
+          ) :
+          (<TableContainer>
+            {toolbarView && toolbarView}
+            <Table className={classes.table} size="small" padding="checkbox">
+                <CustomTableHead
+                  sortObj={sortObj}
+                  onRequestSort={tableData?.length > 0 ? handleRequestSort : null}
+                  rowCount={tableData?.length}
+                  fields={fields}
+                  filteredParams={filteredParams}
+                  withEditAction={!!tableData?.length && handleEditAction ? true : false}
+                  withDeleteAction={!!tableData?.length && handleDeleteAction ? true : false}
+                />
+              <TableBody className={loading ? classes.tableBody : ''}>
+                  {renderCustomTableCell}
+                  {!tableData?.length &&  (
+                    <TableRow style={{ height: 60 }}>
+                      <CustomTableCell
+                        isEmptyCell
+                        loading={loading}
+                      />
+                    </TableRow>
+                  )}
+              </TableBody>
+            </Table>
+          </TableContainer>)
+        }
         {(tableData?.length > 0) && (
           <TablePagination
             component='div'

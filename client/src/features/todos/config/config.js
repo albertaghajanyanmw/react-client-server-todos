@@ -11,8 +11,8 @@ const options = {
 
 const addTodoOptions = {
   inputs: [
-    { id: "name", name: "name", label: M.get('todo.modal.name'), type: "text", variant: "outlined", required: true },
-    { id: "expireDate", name: "expireDate", label: M.get('todo.modal.expireDate'), type: "datetime-local", variant: "outlined", minDate: '', required: false },
+    { id: "name", name: "name", autoFocus: true, label: M.get('todo.modal.name'), type: "text", variant: "outlined", required: true },
+    { id: "estimatedDate", name: "estimatedDate", label: M.get('todo.modal.estimatedDate'), type: "datetime-local", variant: "outlined", minDate: '', required: false },
   ]
 }
 
@@ -21,7 +21,7 @@ const tableOptions = {
     fields: [
       { id: 'id', label: 'todo.modal.id', type: 'text', sortable: true, width: '15%' },
       { id: 'name', label: 'todo.modal.name', type: 'text', sortable: true, width: '35%' },
-      { id: 'expireDate', label: 'todo.modal.expireDate', type: 'text', sortable: true, width: '25%' },
+      { id: 'estimatedDate', label: 'todo.modal.estimatedDate', type: 'text', sortable: true, width: '25%' },
       { id: 'status', label: 'todo.modal.status', type: 'text', sortable: true, width: '15%' },
     ],
     rowsPerPageOptions: [3, 5, 10, 25, 50, 100],

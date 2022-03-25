@@ -27,10 +27,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      expireDate: {
+      estimatedDate: {
         type: Sequelize.DATE,
         allowNull: true,
-        field: 'expire_date'
+        field: 'estimated_date'
       },
       archived: {
         type: Sequelize.BOOLEAN,
