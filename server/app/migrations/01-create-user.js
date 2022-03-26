@@ -1,3 +1,5 @@
+const { CONSTANTS } = require("../constants/Constants");
+
 const PASSWORD_EXPIRE_DAYS = 90;
 
 module.exports = {
@@ -8,6 +10,11 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
+      },
+      nickName: {
+        type: Sequelize.STRING(255),
+        allowNull: true,
+        field: 'nick_name'
       },
       firstName: {
         type: Sequelize.STRING(255),
@@ -21,11 +28,8 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING(255),
-        allowNull: false,
+        allowNull: true,
         field: 'email'
-      },
-      role: {
-        type: Sequelize.ENUM('admin', 'user')
       },
       passwordHash: {
         type: Sequelize.STRING,
@@ -73,7 +77,8 @@ module.exports = {
         field: 'phone'
       },
       role: {
-        type: Sequelize.ENUM('admin', 'user'),
+        // todo separate to another table
+        type: Sequelize.ENUM(CONSTANTS.UsersRoles),
         validate: {
             notEmpty: true
         }

@@ -14,13 +14,10 @@ const logOut = () => {
 }
 
 export default {
-  login: (username, password) => {
+  login: (data, asGuest = false) => {
     const options = {
-      url: apiEndpoints.login,
-      data : {
-        email: username,
-        password
-      }
+      url: asGuest ? apiEndpoints.loginGuest : apiEndpoints.login,
+      data
     };
     return post(options).then(result => {
       cookie.save(AUTH_TOKEN, result.data.token, {
@@ -37,6 +34,10 @@ export default {
   },
   register: async (data) => {
     const options = { url: `${apiEndpoints.register}`, data};
+    return post(options);
+  },
+  registerGuest: async (data) => {
+    const options = { url: `${apiEndpoints.registerGuest}`, data};
     return post(options);
   },
   logOut: () => {

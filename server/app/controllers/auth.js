@@ -8,20 +8,19 @@ const { users: usersValidator } = require('schemes');
 const { isSchemeValidSync } = require('helpers/validate');
 const {CONSTANTS} = require('constants/Constants');
 
-module.exports.postLogin = async (request, response) => {
+const login = async (request, user) => {
     try {
-        const user = await Users.findOne({where: { email: request.body.email }});
-
         if(!user) {
-            return response.status(401).json({message: 'Unauthorized'});
+            return {success: false, status: 401, message: 'Unauthorized'};
         }
         const validPassword = await crypt.compare(request.body.password, user.passwordHash);
         if(!validPassword) {
-            return response.status(401).json({message: 'Unauthorized'});
+            return {success: false, status: 401, message: 'Unauthorized'};
         }
         const token = jwt.sign(
             {
                 id: user.id,
+                nickName: user.nickName,
                 email: user.email,
                 is_active: user.is_active,
                 created_date: user.created_date,
@@ -32,7 +31,34 @@ module.exports.postLogin = async (request, response) => {
             loginSecretKey,
             {expiresIn: CONSTANTS.LOGIN_TOKEN_EXPiRE_DATE}
         );
-        return response.header(CONSTANTS.AUTHORIZATION, token).json({ success: true, token: token, ...user.dataValues });
+        return {success: true, token};
+
+    } catch(error) {
+        return {success: false, status: 500, message: 'Internal server error'};
+    }
+};
+
+module.exports.postLogin = async (request, response) => {
+    try {
+        const user = await Users.findOne({where: { email: request.body.email }});
+        const result = await login(request, user);
+        if(!result.success) {
+            return response.status(result.status).json({message: result.message});
+        }
+        return response.header(CONSTANTS.AUTHORIZATION, result.token).json({ success: true, token: result.token, ...user.dataValues });
+    } catch(error) {
+        return response.status(500).json({message: 'Internal server error'});
+    }
+};
+
+module.exports.postLoginGuest = async (request, response) => {
+    try {
+        const user = await Users.findOne({where: { nickName: request.body.nickName }});
+        const result = await login(request, user);
+        if(!result.success) {
+            return response.status(result.status).json({message: result.message});
+        }
+        return response.header(CONSTANTS.AUTHORIZATION, result.token).json({ success: true, token: result.token, ...user.dataValues });
     } catch(error) {
         return response.status(500).json({message: 'Internal server error'});
     }
@@ -48,7 +74,7 @@ module.exports.register = async (req, res) => {
         }
         const exist = await Users.findOne({ where: { email: req.body.email } });
         if (exist) {
-            return res.status(409).send("Email already exists");
+            return res.status(409).send({message: "Email already exists"});
         }
         if (payload.password) {
             userData.passwordHash = await crypt.hash(payload.password);
@@ -56,12 +82,38 @@ module.exports.register = async (req, res) => {
         }
         const activationLink = uuid.v4();
         transaction = await sequelize.transaction();
-        const createdUser = await Users.create({...userData, isActive: false, activationLink}, { transaction });
+        const createdUser = await Users.create({...userData, isActive: false, activationLink, role: 'user'}, { transaction });
         if (createdUser) {
             await mailService.sendActivationMail(req.body.email, `${apiUrl}/api/auth/activate/${activationLink}`);
             await transaction.commit();
             return res.json({ user: createdUser, message: 'User has been created.' });
         }
+    } catch(err) {
+        if (transaction) {
+            await transaction.rollback();
+        }
+        return res.status(500).json({ message: 'Error in create user' });
+    }
+};
+
+module.exports.registerGuest = async (req, res) => {
+    let transaction;
+    try {
+        const payload = { ...req.body };
+        const { isValid, data: userData } = isSchemeValidSync(usersValidator.createGuest, payload);
+        if (!isValid) {
+            return res.status(400).json({ message: 'validation failed' });
+        }
+        const exist = await Users.findOne({ where: { nickName: req.body.nickName } });
+        if (exist) {
+            return res.status(409).send({message: "Nickname already exists"});
+        }
+        if (payload.password) {
+            userData.passwordHash = await crypt.hash(payload.password);
+            delete userData.password;
+        }
+        const createdUser = await Users.create({...userData, isActive: true, role: 'guest'} );
+        return res.json({ user: createdUser, message: 'User has been created.' });
     } catch(err) {
         if (transaction) {
             await transaction.rollback();

@@ -1,6 +1,8 @@
 {
   "login": "auth/login",
+  "loginGuest": "auth/login/guest",
   "register": "auth/register",
+  "registerGuest": "auth/register/guest",
   "users": "users",
   "user": "user/:userId",
   "updateFirebaseToken": "/users/:userId/firebase/token",

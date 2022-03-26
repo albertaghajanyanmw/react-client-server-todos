@@ -5,14 +5,17 @@ const en = {
     username: 'Username',
     password: 'Password',
     signIn: 'Sign in',
+    signInGuest: 'Sign in as a guest',
     createAccount: 'Dont have an account yet ?',
     register: 'Register one',
     errors: {
       common: 'Invalid credentials!',
     },
+    registerGuest: 'Register as a guest'
   },
   register: {
     title: 'Registration',
+    nickName: 'Nick name',
     firstName: 'First name',
     lastName: 'Last name',
     email: 'Email',
@@ -20,7 +23,8 @@ const en = {
     backToLogin: 'Back to Sign in',
     errors: {
       common: 'Could not register new user.'
-    }
+    },
+    submit: 'Register'
   },
   navbar: {
     todo: 'Todo',

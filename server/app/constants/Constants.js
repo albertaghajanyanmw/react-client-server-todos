@@ -27,7 +27,8 @@ const CONSTANTS = {
         list: ['inprogress', 'completed'],
         defaultValue: 'inprogress',
         expireDate: 10
-    }
+    },
+    UsersRoles: ['guest', 'user', 'admin']
 };
 
 module.exports = {CONSTANTS};

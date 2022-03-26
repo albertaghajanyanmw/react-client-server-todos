@@ -56,6 +56,18 @@ module.exports = {
         },
         required: ['firstName', 'lastName', 'email', 'password']
     },
+    createGuest: {
+        properties: {
+            nickName: {
+                type: 'string',
+                maxLength: 255
+            },
+            password:{
+                type: 'string',
+            }
+        },
+        required: ['nickName', 'password']
+    },
     subscribe: {
         properties: {
             firebaseSubscribe: {

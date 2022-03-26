@@ -1,4 +1,5 @@
 const crypt = require('helpers/crypt');
+const { CONSTANTS } = require('../constants/Constants');
 const PASSWORD_EXPIRE_DAYS = 90;
 
 module.exports = (sequelize, DataTypes) => {
@@ -9,6 +10,11 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             autoIncrement: true,
             field: 'id'
+        },
+        nickName: {
+            type: DataTypes.STRING(255),
+            allowNull: true,
+            field: 'nick_name'
         },
         firstName: {
             type: DataTypes.STRING(255),
@@ -22,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         email: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
             field: 'email'
         },
         passwordHash: {
@@ -65,7 +71,8 @@ module.exports = (sequelize, DataTypes) => {
             field: 'phone'
         },
         role: {
-          type: DataTypes.ENUM('admin', 'user'),
+        // todo separate to another table
+          type: DataTypes.ENUM(CONSTANTS.UsersRoles),
           validate: {
               notEmpty: true
           }
