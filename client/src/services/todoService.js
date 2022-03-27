@@ -2,6 +2,10 @@ import { get, post, put, del } from 'services/client';
 import { apiEndpoints } from 'configs';
 
 export default {
+  getAllTodos: async (params) => {
+    const options = { url: `${apiEndpoints.allTodos}`, params: {...params} };
+    return get(options);
+  },
   getTodos: async (params) => {
     const options = { url: `${apiEndpoints.todos}`, params: {...params} };
     return get(options);

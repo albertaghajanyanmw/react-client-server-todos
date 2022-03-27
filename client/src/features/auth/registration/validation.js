@@ -27,4 +27,20 @@ const guestValidationSchema = yup.object({
     .required('Password is required'),
 });
 
-export {userValidationSchema, guestValidationSchema};
+const switchGuestValidationSchema = yup.object({
+  firstName: yup
+    .string('Enter your First name')
+    .required('First name is required'),
+  lastName: yup
+    .string('Enter your Last name')
+    .required('Last name is required'),
+  nickName: yup
+    .string('Enter your Nick name')
+    .required('Nick name is required'),
+  password: yup
+    .string('Enter your password')
+    .min(5, 'Password should be of minimum 5 characters length')
+    .required('Password is required'),
+});
+
+export {userValidationSchema, guestValidationSchema, switchGuestValidationSchema};

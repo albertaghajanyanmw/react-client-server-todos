@@ -1,6 +1,6 @@
 import { dateFormat } from "./helper";
 
-const createUsersTableData = (id, firstName, lastName, email, image) => ({ id, firstName, lastName, email, image });
+const createUsersTableData = (id, firstName, lastName, nickName, email, image) => ({ id, firstName, lastName, nickName, email, image });
 
 const adaptUsersTableData = (data) => {
   const dataList = [];
@@ -10,6 +10,7 @@ const adaptUsersTableData = (data) => {
         item.id,
         item.firstName,
         item.lastName,
+        item.nickName,
         item.email,
         item.image
       )

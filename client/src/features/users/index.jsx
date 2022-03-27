@@ -48,11 +48,6 @@ const UsersPage = () => {
     getUsersLists();
   }, [getUsersLists]);
 
-  const logout = () => {
-    logOut();
-    history.push(routes.login.path)
-  }
-
   return (
     <div className={classes.content}>
         <main className={classes.content}>

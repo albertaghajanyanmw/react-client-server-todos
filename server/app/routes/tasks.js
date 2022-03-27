@@ -2,6 +2,7 @@ const tasks = require('controllers/tasks');
 const {verifyLoginToken} = require('helpers/validateToken');
 
 module.exports = (app) => {
+    app.route('/tasks/all').get(verifyLoginToken, tasks.getAllTasks)
     app.route('/tasks').get(verifyLoginToken, tasks.getTasks);
     app.route('/tasks/:id').get(verifyLoginToken, tasks.getTask);
     app.route('/tasks').post(verifyLoginToken, tasks.create);

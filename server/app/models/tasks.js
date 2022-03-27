@@ -47,7 +47,9 @@ module.exports = (sequelize, DataTypes) => {
                 name: 'userId',
                 field: 'user_id',
                 allowNull: false
-            }
+            },
+            onUpdate: 'CASCADE',
+            onDelete: 'CASCADE'
         });
     };
     return tasks;

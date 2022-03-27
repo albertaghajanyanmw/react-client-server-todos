@@ -25,7 +25,7 @@ const initialState = {
 export const fetchTodoList = createAsyncThunk(
   'todoList/fetchTodoList',
   async (params) => {
-    const response = await todoService.getTodos(params || {params: initialState.params});
+    const response = await todoService.getAllTodos(params || {params: initialState.params});
     return response.data;
   }
 );

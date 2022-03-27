@@ -7,6 +7,19 @@ const {CONSTANTS} = require('constants/Constants');
 const notificationService = require('services/notificationService');
 const { getListPayload } = require('./common');
 
+module.exports.getAllTasks = async (req, res) => {
+    try {
+        let payload = getListPayload(req);
+        payload.include = [{ model: Users }];
+        const { count, rows } = await Tasks.findAndCountAll(payload);
+        return res.json({ count: count, data: rows });
+    } catch(err) {
+        return res
+            .status(INTERNAL_SERVER_ERROR)
+            .json(responseBuilder.couldNotGetCriteria(CONSTANTS.TypeNames.TASKS.toLowerCase()));
+    }
+};
+
 module.exports.getTasks = async (req, res) => {
     try {
         let payload = getListPayload(req);
@@ -69,7 +82,10 @@ module.exports.update = async (req, res) => {
             return res.status(400).json({ message: 'Validation failed.', errors });
         }
         const apiPayload = { where: { id: req.params.id, userId: req.user.id } };
-        await Tasks.update(taskData, apiPayload);
+        const result = await Tasks.update(taskData, apiPayload);
+        if (!result[0]) {
+            return res.status(400).json({ message: 'Task not found' });
+        }
         const updatedTask = await Tasks.findByPk(req.params.id);
         return res.json({ task: updatedTask, message: 'Task has been updated.' });
     } catch(err) {
@@ -86,7 +102,10 @@ module.exports.delete = async (req, res) => {
         if (!isValid) {
             return res.status(400).json({ message: 'Validation failed.', errors });
         }
-        await Tasks.destroy({ where: { id: req.params.id, userId: req.user.id }});
+        const result = await Tasks.destroy({ where: { id: req.params.id }});
+        if (!result) {
+            return res.status(400).json({ message: 'Task not found' });
+        }
         return res.json({ message: 'Task has been deleted.' });
     } catch(err) {
         return res.status(INTERNAL_SERVER_ERROR).json({ message: 'Error to delete new task.' });

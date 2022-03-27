@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { Button, Box, Grid, Typography } from '@mui/material';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
 import { makeStyles } from '@mui/styles';
 
 import M from 'messages';
@@ -9,7 +11,7 @@ import authService from 'services/authService';
 import { routes } from 'configs';
 import CustomForm from 'components/form';
 import { formOptions } from './config/config';
-import { userValidationSchema, guestValidationSchema } from './validation';
+import { userValidationSchema, guestValidationSchema, switchGuestValidationSchema } from './validation';
 import styles from './styles';
 import toast from 'react-hot-toast';
 
@@ -17,10 +19,10 @@ const RegistrationPage = () => {
   const useStyles = makeStyles(styles);
   const classes = useStyles();
   const history = useHistory();
-
-  const asGuest = history.location.pathname.includes('/guest');
-  const initialValues = asGuest ? {nickName: '', password: ''} : { firstName: '', lastName: '', email: '', password: '' };
-  const validationSchema = asGuest ? guestValidationSchema : userValidationSchema;
+  const [switchGuest, setSwitchGuest] = useState(false);
+  const asGuest = history?.location?.pathname?.includes('/guest');
+  const initialValues = asGuest ? {nickName: '', password: ''} : switchGuest ? { firstName: '', lastName: '', nickName: '', password: '' } : { firstName: '', lastName: '', email: '', password: '' };
+  const validationSchema = asGuest ? guestValidationSchema : switchGuest ? switchGuestValidationSchema : userValidationSchema;
   const registerCallback = asGuest ? authService.registerGuest : authService.register;
 
   const formik = useFormik({
@@ -28,7 +30,7 @@ const RegistrationPage = () => {
     validationSchema,
     onSubmit: async (values) => {
       try {
-        await registerCallback(values);
+        await registerCallback({...values, switchGuestAccount: switchGuest});
         toast.success(M.get('actionMsg.success.create'));
         history.push(routes.login.path);
       } catch (error) {
@@ -37,7 +39,11 @@ const RegistrationPage = () => {
     },
   });
 
-  const formInputs = asGuest ? formOptions.guestInputs : formOptions.inputs;
+  const formInputs = asGuest ? formOptions.guestInputs : switchGuest ? formOptions.switchGuestInputs : formOptions.inputs;
+
+  const handleSwitchGuest = () => {
+    setSwitchGuest((prev) => !prev);
+  }
 
   return (
     <Box className={classes.container} p={4} elevation={3}>
@@ -48,6 +54,9 @@ const RegistrationPage = () => {
               <Grid item xs={12}>
                 <Typography variant="h5"> {M.get('register.title')} </Typography>
               </Grid>
+              {!asGuest && <Grid item xs={12}>
+                <FormControlLabel name="switchGuestAccount" checked={switchGuest} onClick={handleSwitchGuest} control={<Switch />} label={M.get('register.switchGuest')} />
+              </Grid>}
               <CustomForm inputs={formInputs} formik={formik} />
             </Grid>
           </Grid>

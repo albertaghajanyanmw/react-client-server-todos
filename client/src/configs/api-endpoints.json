@@ -7,6 +7,7 @@
   "user": "user/:userId",
   "updateFirebaseToken": "/users/:userId/firebase/token",
   "todos": "tasks",
+  "allTodos": "tasks/all",
   "todo": "tasks/:todoId",
   "createTodo": "tasks",
   "updateTodo": "tasks/:todoId",

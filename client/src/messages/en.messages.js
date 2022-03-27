@@ -11,7 +11,8 @@ const en = {
     errors: {
       common: 'Invalid credentials!',
     },
-    registerGuest: 'Register as a guest'
+    registerGuest: 'Register as a guest',
+    nickName: 'Nick name',
   },
   register: {
     title: 'Registration',
@@ -24,7 +25,10 @@ const en = {
     errors: {
       common: 'Could not register new user.'
     },
-    submit: 'Register'
+    submit: 'Register',
+    switchGuest: 'Switch with your guest account',
+    guestNickName: 'Your guest account nick name',
+    guestPassword: 'Your guest account password'
   },
   navbar: {
     todo: 'Todo',

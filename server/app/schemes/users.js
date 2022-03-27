@@ -52,7 +52,11 @@ module.exports = {
             },
             password:{
                 type: 'string',
-            }
+            },
+            nickName: {
+                type: 'string',
+                maxLength: 255
+            },
         },
         required: ['firstName', 'lastName', 'email', 'password']
     },

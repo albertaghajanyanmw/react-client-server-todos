@@ -40,7 +40,7 @@ const login = async (request, user) => {
 
 module.exports.postLogin = async (request, response) => {
     try {
-        const user = await Users.findOne({where: { email: request.body.email }});
+        const user = await Users.findOne({where: { email: request.body.email, isActive: true }});
         const result = await login(request, user);
         if(!result.success) {
             return response.status(result.status).json({message: result.message});
@@ -72,21 +72,39 @@ module.exports.register = async (req, res) => {
         if (!isValid) {
             return res.status(400).json({ message: 'validation failed' });
         }
-        const exist = await Users.findOne({ where: { email: req.body.email } });
-        if (exist) {
-            return res.status(409).send({message: "Email already exists"});
+        let existGuest;
+        if (req.body.switchGuestAccount) {
+            existGuest = await Users.findOne({ where: { nickName: req.body.nickName } });
+            if(!existGuest) {
+                return res.status(401).send({message: 'Not found guest user.'});
+            }
+            const validPassword = await crypt.compare(req.body.password, existGuest.passwordHash);
+            if(!validPassword) {
+                return res.status(401).send({message: 'Invalid credentials'});
+            }
+        } else {
+            const existUser = await Users.findOne({ where: { email: req.body.email } });
+            if (existUser) {
+                return res.status(409).send({message: "Email already exists"});
+            }
+            if (payload.password) {
+                userData.passwordHash = await crypt.hash(payload.password);
+                delete userData.password;
+            }
         }
-        if (payload.password) {
-            userData.passwordHash = await crypt.hash(payload.password);
-            delete userData.password;
-        }
+
         const activationLink = uuid.v4();
         transaction = await sequelize.transaction();
-        const createdUser = await Users.create({...userData, isActive: false, activationLink, role: 'user'}, { transaction });
-        if (createdUser) {
-            await mailService.sendActivationMail(req.body.email, `${apiUrl}/api/auth/activate/${activationLink}`);
+        let newUser;
+        if (req.body.switchGuestAccount) {
+            newUser = await Users.update({...userData, isActive: false, activationLink, role: 'user'}, { where: {id: existGuest.id}, transaction });
+        } else {
+            newUser = await Users.create({...userData, isActive: false, activationLink, role: 'user'}, { transaction });
+        }
+        if (newUser) {
+            mailService.sendActivationMail(req.body.email, `${apiUrl}/api/auth/activate/${activationLink}`);
             await transaction.commit();
-            return res.json({ user: createdUser, message: 'User has been created.' });
+            return res.json({ user: newUser, message: 'User has been created.' });
         }
     } catch(err) {
         if (transaction) {

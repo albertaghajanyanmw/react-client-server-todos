@@ -95,12 +95,12 @@ const TodoList = () => {
     onSubmit: async (values, {resetForm}) => {
       try {
         clearModeAndCloseModal();
+        resetForm();
         if (mode.isEdit) {
           dispatch(updateTodo({...mode.currentTodo, name: values.name, estimatedDate: values.estimatedDate || null}));
           return;
         }
         await backgroundSyncOrRequest({name: values.name, estimatedDate: values.estimatedDate || null});
-        resetForm();
       } catch (err) {
         toast.error(getMessage(err?.response?.data, 'error'));
       }
@@ -156,13 +156,11 @@ const TodoList = () => {
     }, [handleOpen]
   );
 
-  // Updated todo status
   const handleCheck = useCallback((todo) => {
     const updatedStatus = todo.status === 'inprogress' ? 'completed' : 'inprogress';
     dispatch(updateTodo({ id: todo.id, status: updatedStatus }));
   }, [dispatch]);
 
-  // Delete todo
   const handleDelete = useCallback((todo) => {
     dispatch(deleteTodo(todo.id));
   }, [dispatch]);

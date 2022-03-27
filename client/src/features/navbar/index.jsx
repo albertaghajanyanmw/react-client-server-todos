@@ -115,7 +115,7 @@ const CustomAppBar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title={currentUser.email || currentUser.nickName}>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt={`${currentUser.firstName} ${currentUser.firstName}`} src={currentUser.image} />
               </IconButton>

@@ -15,7 +15,7 @@ const User = ({ user }) => {
       <CardContent>
         <div className={classes.cardContent}>
           <Typography variant="h5" component="h2">
-            {user.firstName} {user.lastName}
+            {(user.firstName || user.lastName) ? `${user.firstName} ${user.lastName}` : user.nickName}
           </Typography>
           <Typography variant="h5" component="h2">
             {user.email}
@@ -34,9 +34,10 @@ const User = ({ user }) => {
 
 User.propTypes = {
     user: PropTypes.shape({
-    firstName: PropTypes.string.isRequired,
-    lastName: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    nickName: PropTypes.string,
+    email: PropTypes.string,
     image: PropTypes.string
     }).isRequired
 }
