@@ -47,7 +47,6 @@ const CustomFormItem = ({ input, formik }) => {
                     error={item.required && formik.touched[item.name] && Boolean(formik.errors[item.name])}
                     helperText={formik.touched[item.name] && formik.errors[item.name]}
                     renderInput={(props) => <TextField classes={{ root: classes.item }} {...props} />}
-                    minDate={item.minDate}
                     onChange={(value) => formik.handleChange({target: {name: item.name, value}})}
                   />
                 </LocalizationProvider>

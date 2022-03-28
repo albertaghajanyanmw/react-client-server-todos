@@ -12,7 +12,7 @@ const options = {
 const addTodoOptions = {
   inputs: [
     { id: "name", name: "name", autoFocus: true, label: M.get('todo.modal.name'), type: "text", variant: "outlined", required: true },
-    { id: "estimatedDate", name: "estimatedDate", label: M.get('todo.modal.estimatedDate'), type: "datetime-local", variant: "outlined", minDate: '', required: false },
+    { id: "estimatedDate", name: "estimatedDate", label: M.get('todo.modal.estimatedDate'), type: "datetime-local", variant: "outlined", required: false },
   ]
 }
 

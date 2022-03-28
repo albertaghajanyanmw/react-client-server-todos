@@ -81,7 +81,7 @@ module.exports.update = async (req, res) => {
         if (!isValid) {
             return res.status(400).json({ message: 'Validation failed.', errors });
         }
-        const apiPayload = { where: { id: req.params.id, userId: req.user.id } };
+        const apiPayload = { where: { id: req.params.id } };
         const result = await Tasks.update(taskData, apiPayload);
         if (!result[0]) {
             return res.status(400).json({ message: 'Task not found' });
@@ -97,7 +97,7 @@ module.exports.update = async (req, res) => {
 
 module.exports.delete = async (req, res) => {
     try {
-        const payload = { taskId: req.params.id, userId: req.user.id };
+        const payload = { taskId: req.params.id };
         const { isValid, errors } = isSchemeValidSync(tasksValidator.deleteTask, payload);
         if (!isValid) {
             return res.status(400).json({ message: 'Validation failed.', errors });

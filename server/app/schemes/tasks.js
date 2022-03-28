@@ -18,16 +18,15 @@ module.exports = {
             estimatedDate: { type: ['string', 'null'], maxLength: 255 },
             userId: { type: 'number', maxLength: 10 },
         },
-        // required: ['name', 'estimatedDate'],
         required: ['name'],
         additionalProperties: false
     },
     deleteTask: {
         properties: {
             taskId: { type: 'number', maxLength: 10 },
-            userId: { type: 'number', maxLength: 10 },
+            // userId: { type: 'number', maxLength: 10 },
         },
-        required: ['taskId', 'userId'],
+        required: ['taskId'],
         additionalProperties: false
     },
 };

@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { makeStyles } from '@mui/styles';
 
 import { BrowserRouter, Switch, Route, useHistory } from 'react-router-dom';
@@ -34,6 +34,7 @@ const useStyles = makeStyles(() => ({
 function App() {
   const classes = useStyles();
   const history = useHistory();
+
   setupInterceptors(history);
 
   // save token in the server

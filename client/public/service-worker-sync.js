@@ -1,4 +1,5 @@
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js')
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
+
 if (workbox) {
   console.log('Workbox successfully is loaded');
 } else {
@@ -18,7 +19,7 @@ routing.registerRoute(
 const handlePush = (event) => {
   const data = event.data.json()
   console.log('New notification', data)
-  event.waitUntil(
+  return event.waitUntil(
     self.registration.showNotification(data.notification.title, {
       body:data.notification.body,
       icon:data.icon

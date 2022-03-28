@@ -11,9 +11,9 @@ export const initializeFirebase = () => {
     });
 }
 
+const messaging = firebaseApp.messaging();
 export const askForPermissionToReceiveNotifications = async () => {
   try {
-    const messaging = firebaseApp.messaging();
     await messaging.requestPermission();
     messaging.usePublicVapidKey(process.env.REACT_APP_PUBLIC_VAPID_KEY_ORG);
     const token = await messaging.getToken();
@@ -65,3 +65,10 @@ const sendTokenToServer = async (token) => {
     console.log("Token already sent to server so won't send it again unless it changes");
   }
 };
+
+export const onMessageListener = () =>
+  new Promise((resolve) => {
+    messaging.onMessage((payload) => {
+      resolve(payload);
+    });
+  });

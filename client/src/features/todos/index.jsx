@@ -23,7 +23,7 @@ import { validationSchema } from './validation';
 import { options, addTodoOptions, tableOptions } from './config/config.js';
 import styles from './styles';
 import CircularIndeterminate from 'components/loading/Loading';
-import { askForPermissionToReceiveNotifications } from '../../firebase/pushNotification';
+import { askForPermissionToReceiveNotifications, onMessageListener } from '../../firebase/pushNotification';
 import NotificationButton from './NotificationButton';
 
 const TodoList = () => {
@@ -91,7 +91,6 @@ const TodoList = () => {
   const formik = useFormik({
     initialValues: { name: '', estimatedDate: '' },
     validationSchema,
-    enableReinitialize: true,
     onSubmit: async (values, {resetForm}) => {
       try {
         clearModeAndCloseModal();
@@ -193,7 +192,6 @@ const TodoList = () => {
       filteredParams={filteredParams}
     />
   ), [onSearchCallback, filteredParams]);
-
 
   return (
     <Box className={classes.root}>

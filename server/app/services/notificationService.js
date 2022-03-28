@@ -1,5 +1,6 @@
 const admin = require('firebase-admin');
 const { firebase: { key } } = require('settings');
+const { users: Users } = require('models');
 const serviceAccount = require(key);
 
 class NotificationService {
@@ -11,7 +12,7 @@ class NotificationService {
         });
     }
 
-    async sendFCMNotification(title, body, registrationTokens) {
+    async sendFCMNotification(title, body, registrationTokens, userId) {
         return new Promise(async (resolve, reject) => {
             const message = {
                 notification: {
@@ -34,6 +35,7 @@ class NotificationService {
                 });
                 resolve(res);
             } catch(err) {
+                await Users.update({ firebaseToken: null }, { where: { id: userId } });
                 console.log("\n\n\n Could not sent push notification. Error\n ", err, "\n\n")
             }
         });
