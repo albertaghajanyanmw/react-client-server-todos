@@ -3,7 +3,6 @@ export default (theme) => ({
   modal: {
     minWidth: 500,
     maxWidth: 500,
-    minHeight: 300,
     maxHeight: 300,
     backgroundColor: 'white',
   },

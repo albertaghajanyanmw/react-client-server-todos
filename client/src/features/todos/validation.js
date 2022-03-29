@@ -5,8 +5,14 @@ const validationSchema = yup.object({
     .string('Enter todo name.')
     .required('Name is required.'),
   estimatedDate: yup
-    .string('Enter todo expire date.')
+    .string('Enter todo estimated date.')
     .nullable()
 });
 
-export {validationSchema};
+const reminderValidationSchema = yup.object({
+  reminderDate: yup
+    .string('Enter todo reminder date.')
+    .nullable()
+});
+
+export {validationSchema, reminderValidationSchema};

@@ -12,10 +12,7 @@ const useStyles = makeStyles(styles);
 const CustomTableToolbar = (props) => {
   const classes = useStyles();
 
-  const {
-    onSearchCallback,
-    filteredParams,
-  } = props;
+  const { onSearchCallback, filteredParams } = props;
 
   const searchValue = filteredParams?.params?.search?.value || '';
 
@@ -30,24 +27,6 @@ const CustomTableToolbar = (props) => {
     </Toolbar>
   );
 };
-
-// params: {
-//   sort: { field: "id", order: "desc" },
-//   filter: {},
-//   limit: 3,
-//   skip: 0,
-// }
-
-// inputs: PropTypes.arrayOf(
-//   PropTypes.shape({
-//     id: PropTypes.string.isRequired,
-//     name: PropTypes.string.isRequired,
-//     label: PropTypes.string.isRequired,
-//     type: PropTypes.string.isRequired,
-//     variant: PropTypes.string.isRequired,
-//     icon: PropTypes.node,
-//   })
-// ),
 
 CustomTableToolbar.propTypes = {
   onSearchCallback: PropTypes.func.isRequired,

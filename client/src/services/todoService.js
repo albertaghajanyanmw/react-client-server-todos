@@ -25,5 +25,9 @@ export default {
   deleteTodo: async (id) => {
     const options = { url: apiEndpoints.updateTodo.replace(':todoId', id)};
     return del(options);
-  }
+  },
+  reminderTodo: async (id, data) => {
+    const options = { url: apiEndpoints.reminderTodo.replace(':todoId', id), data};
+    return put(options);
+  },
 }

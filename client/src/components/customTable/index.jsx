@@ -26,6 +26,7 @@ function CustomTable({
   setFilteredParams,
   handleEditAction,
   handleDeleteAction,
+  handleReminder,
   rowUniqueKey,
   handleClickIcon,
   handleRowClick,
@@ -102,6 +103,14 @@ function CustomTable({
                 isDeleteAction
               />
             }
+            {handleReminder &&
+              <CustomTableCell
+                key={`${row[rowUniqueKey]}-reminder`}
+                handleClickIcon={handleReminder}
+                data={row}
+                isReminderAction
+              />
+            }
           </TableRow>
         </Tooltip>))
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -128,6 +137,7 @@ function CustomTable({
                   filteredParams={filteredParams}
                   withEditAction={!!tableData?.length && handleEditAction ? true : false}
                   withDeleteAction={!!tableData?.length && handleDeleteAction ? true : false}
+                  withReminderAction={!!tableData?.length && handleReminder ? true : false}
                 />
               <TableBody className={loading ? classes.tableBody : ''}>
                   {renderCustomTableCell}
@@ -167,6 +177,7 @@ CustomTable.propTypes = {
   setFilteredParams: PropTypes.func,
   handleEditAction: PropTypes.func,
   handleDeleteAction: PropTypes.func,
+  handleReminder: PropTypes.func,
   rowUniqueKey: PropTypes.string,
   handleClickIcon: PropTypes.func,
   toolbarView: PropTypes.node,
@@ -180,6 +191,7 @@ CustomTable.defaultProps = {
   setFilteredParams: null,
   handleEditAction: null,
   handleDeleteAction: null,
+  handleReminder: null,
   rowUniqueKey: 'id',
   handleClickIcon: null,
   toolbarView: null,

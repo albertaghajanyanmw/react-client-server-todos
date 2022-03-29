@@ -3,7 +3,7 @@ import { variables } from "configs";
 // todo: add and using all variables from theme
 export default (theme) => ({
   root: {
-    minHeight: `calc(100vh - ${variables.headerHeight} - 40px)`,
+    minHeight: `calc(100vh - ${variables.headerHeight} - 60px)`,
     borderRadius: 'unset',
     flexGrow: 1,
     display: 'block',
@@ -60,7 +60,7 @@ export default (theme) => ({
     margin: '0 auto',
     marginTop: '2rem',
     marginBottom: '1.5rem',
-    color: '#646681',
+    color: theme.palette.primary.titleColor,
   },
   itemContainer: {
     display: 'flex',
@@ -102,7 +102,10 @@ export default (theme) => ({
   },
   emptyText: {
     color: 'grey'
+  },
+  loading: {
+    minHeight: `calc(100vh - ${variables.headerHeight} - 60px)`,
+    display: 'flex',
+    alignItems: 'center',
   }
 });
-
-

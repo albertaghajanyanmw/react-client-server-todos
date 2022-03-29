@@ -1,4 +1,5 @@
 const {StatusCodes: {INTERNAL_SERVER_ERROR}} = require('http-status-codes');
+const schedule = require('node-schedule')
 const responseBuilder = require('helpers/errorResponseBodyBuilder');
 const { users: Users, tasks: Tasks, sequelize } = require('models');
 const { isSchemeValidSync } = require('helpers/validate');
@@ -54,7 +55,6 @@ module.exports.create = async (req, res) => {
         }
         transaction = await sequelize.transaction();
         const createdTask = await Tasks.create(taskData, { transaction });
-        // send push notification (todo: separate to generic service)
         const user = await Users.findByPk(req.user.id);
         const firebaseToken = user.firebaseToken;
         const messagePayload = {
@@ -111,3 +111,26 @@ module.exports.delete = async (req, res) => {
         return res.status(INTERNAL_SERVER_ERROR).json({ message: 'Error to delete new task.' });
     }
 };
+
+const getTokenAndSendNotification = async (req) => {
+    const userId = req.user.id;
+    const firebaseToken = (await Users.findByPk(userId)).firebaseToken;
+    if (firebaseToken) {
+        const messagePayload = {
+            title: `Reminder`,
+            body: ` Hi ${req.user.firstName || req.user.nickName}. You set up a reminder for a task {ID: ${req.params.id}}.`
+        };
+        notificationService.sendFCMNotification(messagePayload.title, messagePayload.body, firebaseToken, req.user.id);
+    }
+}
+
+module.exports.scheduleReminder = async (req, res) => {
+    try {
+        const { reminderDate } = req.body;
+        const date = new Date(reminderDate);
+        schedule.scheduleJob(date, () => getTokenAndSendNotification(req));
+        return res.json({ message: 'Successfully scheduled reminder.' });
+    } catch(err) {
+        return res.status(INTERNAL_SERVER_ERROR).json({ message: 'Error to schedule reminder for a task.' });
+    }
+}

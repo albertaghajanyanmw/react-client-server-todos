@@ -93,7 +93,7 @@ const CustomAppBar = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page.id} onClick={handleCloseNavMenu}>
-                  <NavLink to={page.link} className={classes.navLinkActive}>
+                  <NavLink to={page.link} className={classes.menuItem}>
                     <Typography
                       variant="h6"
                       className={classes.navLinkTextActive}
@@ -108,7 +108,7 @@ const CustomAppBar = () => {
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <NavLink key={page.id} to={page.link} className={classes.navLink} >
+              <NavLink key={page.id} to={page.link} className={(state) => (state ? classes.isActive : classes.inactive)} >
                 <Typography variant="h6" className={classes.navLinkText}> {page.label} </Typography>
               </NavLink>
             ))}

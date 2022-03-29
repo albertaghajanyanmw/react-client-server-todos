@@ -47,7 +47,7 @@ const LoginPage = () => {
           <Grid item xs={12}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <Typography variant="h5">{M.get('login.title')}</Typography>
+                <Typography color="primary" variant="h5">{M.get('login.title')}</Typography>
               </Grid>
               <CustomForm inputs={formInputs} formik={formik} />
             </Grid>

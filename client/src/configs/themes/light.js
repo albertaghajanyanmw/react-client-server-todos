@@ -11,8 +11,9 @@ const theme = createTheme({
 
   palette: {
     primary: {
-      main: '#2f4266',
+      main: '#540089',
       error: '#f44336',
+      warn: '#ff6000',
       errorHover: '#ebd7e0',
       link: '#2170ff',
       titleColor: '#646681',
@@ -20,10 +21,12 @@ const theme = createTheme({
       tableRowSuccess: 'green',
       tableRowInprogress: 'orange',
       tableRowError: 'red',
+      navActive: '#daa7ff'
     },
     secondary: {
       main: '#2f4266',
       error: '#f44336',
+      warn: '#ff6000',
       errorHover: '#ebd7e0',
       link: '#2170ff',
       titleColor: '#646681',

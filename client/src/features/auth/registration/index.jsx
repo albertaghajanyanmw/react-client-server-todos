@@ -52,7 +52,7 @@ const RegistrationPage = () => {
           <Grid item xs={12}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <Typography variant="h5"> {M.get('register.title')} </Typography>
+                <Typography color="primary" variant="h5"> {M.get('register.title')} </Typography>
               </Grid>
               {!asGuest && <Grid item xs={12}>
                 <FormControlLabel name="switchGuestAccount" checked={switchGuest} onClick={handleSwitchGuest} control={<Switch />} label={M.get('register.switchGuest')} />

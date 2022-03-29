@@ -16,7 +16,7 @@ import { routes } from 'configs/index';
 
 import './App.css';
 import { Toaster } from 'react-hot-toast';
-import CircularIndeterminate from 'components/loading/Loading';
+import CircularLoading from 'components/loading/Loading';
 import { askForPermissionToReceiveNotifications } from 'firebase/pushNotification';
 
 // pages
@@ -47,7 +47,7 @@ function App() {
 
   return (
     <div className={classNames(classes.root, 'App')}>
-      <Suspense fallback={<CircularIndeterminate />}>
+      <Suspense fallback={<CircularLoading />}>
         <BrowserRouter>
           <Switch>
               <Route path={routes.login.path} exact component={LoginPage} />

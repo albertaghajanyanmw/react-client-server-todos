@@ -66,9 +66,9 @@ const sendTokenToServer = async (token) => {
   }
 };
 
-export const onMessageListener = () =>
-  new Promise((resolve) => {
-    messaging.onMessage((payload) => {
-      resolve(payload);
-    });
-  });
+// export const onMessageListener = () =>
+//   new Promise((resolve) => {
+//     messaging.onMessage((payload) => {
+//       resolve(payload);
+//     });
+//   });

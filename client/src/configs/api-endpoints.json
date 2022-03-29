@@ -11,5 +11,6 @@
   "todo": "tasks/:todoId",
   "createTodo": "tasks",
   "updateTodo": "tasks/:todoId",
-  "deleteTodo": "tasks/:todoId"
+  "deleteTodo": "tasks/:todoId",
+  "reminderTodo": "tasks/reminder/:todoId"
 }

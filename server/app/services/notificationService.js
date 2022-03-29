@@ -13,6 +13,7 @@ class NotificationService {
     }
 
     async sendFCMNotification(title, body, registrationTokens, userId) {
+        console.log("\n\n\n called = notificationService")
         return new Promise(async (resolve, reject) => {
             const message = {
                 notification: {

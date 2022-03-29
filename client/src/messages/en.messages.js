@@ -49,12 +49,26 @@ const en = {
       description: 'Fill the todo details.',
       id: 'ID',
       name: 'Name',
-      estimatedDate: 'Expire date',
-      status: 'Status'
+      estimatedDate: 'Estimated date',
+      status: 'Status',
+      reminderDate: 'Reminder date',
+      reminder: {
+        title: 'Schedule reminder',
+        description: 'Set up todo reminder date.',
+        setReminder: 'Set reminder',
+      }
     },
     noTodos: 'No Todos',
     sortByStatus: 'Sort by status',
-    sortByEstimatedDate: 'Sort by estimated date'
+    sortByEstimatedDate: 'Sort by estimated date',
+    table: {
+      id: 'ID',
+      name: 'Name',
+      estimatedDate: 'Estimated date',
+      status: 'Status',
+      reminderDate: 'Reminder date',
+      user: 'User'
+    },
   },
   table: {
     noResult: 'No result'
@@ -65,6 +79,9 @@ const en = {
     cancel: 'Cancel',
     submit: 'Submit',
     search: 'Search',
+    edit: 'Edit',
+    delete: 'Delete',
+    setReminder: 'Set reminder time',
     changeStatus: 'Click to the row to change status'
   },
   actionMsg: {

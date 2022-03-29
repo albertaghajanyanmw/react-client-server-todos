@@ -46,7 +46,7 @@ const checkExpiredTasks = async () => {
 const start = async () => {
     return setInterval(async () => {
         await checkExpiredTasks();
-    }, 600000);
+    }, 600000000);
 };
 
 module.exports = {

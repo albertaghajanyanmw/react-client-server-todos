@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import { makeStyles } from '@mui/styles';
 import styles from './styles';
 
-function CircularIndeterminate() {
+function CircularLoading() {
   const useStyles = makeStyles(styles);
   const classes = useStyles();
 
@@ -15,4 +15,4 @@ function CircularIndeterminate() {
   );
 }
 
-export default CircularIndeterminate;
+export default CircularLoading;
