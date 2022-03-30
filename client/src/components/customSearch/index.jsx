@@ -55,6 +55,7 @@ const CustomSearch = ({onSearchCallback, searchValue, disableFieldsOnSearch}) =>
                         }
                       }}
                     id="search"
+                    key="search"
                 />
         </FormControl>
     </div>
