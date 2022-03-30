@@ -29,7 +29,7 @@ import {
   updateTodo,
   clearData,
 } from './todosSlice';
-import { reminderValidationSchema, validationSchema } from './validation';
+import { validationSchema } from './validation';
 import { options, addTodoOptions, tableOptions } from './config/config.js';
 import NotificationButton from './NotificationButton';
 import Reminder from './Reminder';
@@ -103,9 +103,7 @@ const TodoList = () => {
 
   const formik = useFormik({
     initialValues: { name: '', estimatedDate: '' },
-    validationSchema: openReminder
-      ? reminderValidationSchema
-      : validationSchema,
+    validationSchema,
     onSubmit: async (values, { resetForm }) => {
       try {
         clearModeAndCloseModal();
@@ -239,11 +237,7 @@ const TodoList = () => {
     handleOpenReminder();
   };
 
-  return status === 'loading' ? (
-    <div className={classes.loading}>
-      <CircularLoading />
-    </div>
-  ) : (
+  return (
     <Box className={classes.root}>
       <NotificationButton
         handleClick={askForPermissionToReceiveNotifications}

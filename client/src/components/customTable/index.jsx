@@ -71,7 +71,6 @@ function CustomTable({
         <Tooltip key={row[rowUniqueKey]} title={M.get('actions.changeStatus')}>
           <TableRow
             onClick={() => handleRowClick(row)}
-            hover={row.isDoorOpened === undefined}
             key={row[rowUniqueKey]}
             className={classNames(classes.tableRow, {
                 [classes.rowSuccess]: isCompleted(row),
