@@ -18,7 +18,6 @@ import { dateFormat, getMessage } from 'helpers/helper';
 import { adaptTodoTableData } from 'helpers/adapter';
 
 import { askForPermissionToReceiveNotifications } from 'firebase/pushNotification';
-import CircularLoading from 'components/loading/Loading';
 import PageTitle from './PageTitle';
 import {
   fetchTodoList,
