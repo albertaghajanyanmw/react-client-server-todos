@@ -3,7 +3,6 @@ import { en } from 'messages/en.messages';
 const messages = {};
 
 messages.get = (path) => {
-  // todo: should be changed to be dynamic
   const current = en;
   const pathParts = path.split('.');
   let message;
