@@ -34,9 +34,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/notifications/subscribe', (req, res) => {
   const subscription = req.body
-
-  console.log("subscription = ", subscription)
-
   const payload = JSON.stringify({
     title: 'Hello!',
     body: 'It works.',
@@ -44,11 +41,10 @@ app.post('/notifications/subscribe', (req, res) => {
 
   webpush.sendNotification(subscription, payload)
     .then(result => {
-      console.log("\n\n\n result = ", result)
+      // todo
     })
     .catch(e => {
-      console.log("\n\n\nEE = ", e)
-      console.log("\n\n\nSTACK = ", e.stack)
+      // todo
     })
 
   res.status(200).json({'success': true})

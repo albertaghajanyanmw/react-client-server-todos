@@ -10,7 +10,7 @@ import { isLoggedIn } from 'services/authService';
 import { routes } from 'configs/index';
 import styles from './styles';
 import { Grid } from '@mui/material';
-import CustomAppBar from 'features/navbar';
+import CustomAppBar from 'components/navbar';
 
 const useStyles = makeStyles(styles);
 

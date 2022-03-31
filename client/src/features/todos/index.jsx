@@ -108,31 +108,20 @@ const TodoList = () => {
         clearModeAndCloseModal();
         resetForm();
         if (mode.isEdit) {
-          dispatch(
-            updateTodo({
-              ...mode.currentTodo,
-              name: values.name,
-              estimatedDate: values.estimatedDate || null,
-            })
-          );
+          dispatch( updateTodo({ ...mode.currentTodo, name: values.name, estimatedDate: values.estimatedDate || null }) );
           return;
         }
-        await backgroundSyncOrRequest({
-          name: values.name,
-          estimatedDate: values.estimatedDate || null,
-        });
+        await backgroundSyncOrRequest({ name: values.name, estimatedDate: values.estimatedDate || null });
       } catch (err) {
         toast.error(getMessage(err?.response?.data, 'error'));
       }
     },
   });
 
-  const updateFilter = useCallback(
-    (e) => {
+  const updateFilter = useCallback((e) => {
       const { value } = e.target;
       dispatch(updateFilterStatus(value));
-    },
-    [dispatch]
+    }, [dispatch]
   );
 
   const memoDialogContent = useMemo(() => {
@@ -145,8 +134,8 @@ const TodoList = () => {
         </form>
       </Box>
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formik.values]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formik]);
 
   const memoizedOptions = useMemo(() => {
     return options.todoStatuses;
@@ -158,37 +147,25 @@ const TodoList = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handleClose]);
 
-  const handleEdit = useCallback(
-    (todo) => {
-      const itemValues = {
-        name: todo.name,
-        estimatedDate: todo.estimatedDateOrg
-          ? dateFormat(new Date(todo.estimatedDateOrg), 'YYYY-MM-DDTHH:mm')
-          : '',
-      };
-      formik.setValues(itemValues);
-      handleOpen();
-      setMode({ isEdit: true, currentTodo: todo });
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [handleOpen]
-  );
+  const handleEdit = useCallback( (todo) => {
+    const itemValues = {
+      name: todo.name,
+      estimatedDate: todo.estimatedDateOrg ? dateFormat(new Date(todo.estimatedDateOrg), 'YYYY-MM-DDTHH:mm') : '',
+    };
+    formik.setValues(itemValues);
+    handleOpen();
+    setMode({ isEdit: true, currentTodo: todo });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [handleOpen]);
 
-  const handleCheck = useCallback(
-    (todo) => {
-      const updatedStatus =
-        todo.status === 'inprogress' ? 'completed' : 'inprogress';
-      dispatch(updateTodo({ id: todo.id, status: updatedStatus }));
-    },
-    [dispatch]
-  );
+  const handleCheck = useCallback((todo) => {
+    const updatedStatus = todo.status === 'inprogress' ? 'completed' : 'inprogress';
+    dispatch(updateTodo({ id: todo.id, status: updatedStatus }));
+  }, [dispatch]);
 
-  const handleDelete = useCallback(
-    (todo) => {
-      dispatch(deleteTodo(todo.id));
-    },
-    [dispatch]
-  );
+  const handleDelete = useCallback((todo) => {
+    dispatch(deleteTodo(todo.id));
+  }, [dispatch]);
 
   const memoTableSource = useMemo(() => {
     return { data: adaptTodoTableData(todoList), count };
@@ -221,15 +198,12 @@ const TodoList = () => {
     [dispatch, searchFields, filteredParams]
   );
 
-  const toolbarView = useMemo(
-    () => (
-      <CustomTableToolbar
-        onSearchCallback={onSearchCallback}
-        filteredParams={filteredParams}
-      />
-    ),
-    [onSearchCallback, filteredParams]
-  );
+  const toolbarView = useMemo(() => (
+    <CustomTableToolbar
+      onSearchCallback={onSearchCallback}
+      filteredParams={filteredParams}
+    />
+  ), [onSearchCallback, filteredParams]);
 
   const handleReminder = (todo) => {
     setMode({ isEdit: false, currentTodo: todo });

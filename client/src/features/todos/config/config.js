@@ -1,4 +1,3 @@
-import { FamilyRestroomOutlined } from '@mui/icons-material';
 import M from 'messages';
 
 const options = {
@@ -19,7 +18,7 @@ const addTodoOptions = {
 
 const remindTodoOptions = {
   inputs: [
-    { id: "reminderDate", name: "reminderDate", label: M.get('todo.modal.reminderDate'), type: "datetime-local", variant: "outlined", required: FamilyRestroomOutlined },
+    { id: "reminderDate", name: "reminderDate", label: M.get('todo.modal.reminderDate'), type: "datetime-local", variant: "outlined", required: true },
   ]
 };
 

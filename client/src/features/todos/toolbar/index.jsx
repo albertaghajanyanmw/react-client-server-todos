@@ -13,7 +13,6 @@ const CustomTableToolbar = (props) => {
   const classes = useStyles();
 
   const { onSearchCallback, filteredParams } = props;
-
   const searchValue = filteredParams?.params?.search?.value || '';
 
   return (

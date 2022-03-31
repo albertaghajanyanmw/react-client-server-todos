@@ -55,7 +55,7 @@ const sendTokenToServer = async (token) => {
       try {
         console.log("Sending token to server...");
         const currentUser = isLoggedIn();
-        const res = await usersService.sendFirebaseToken(currentUser.id, { firebaseToken: token, deviceType: "web" });
+        await usersService.sendFirebaseToken(currentUser.id, { firebaseToken: token, deviceType: "web" });
         console.log("Token successfully sent to server...");
         setTokenSentToServer(true);
       } catch(err) {
@@ -65,10 +65,3 @@ const sendTokenToServer = async (token) => {
     console.log("Token already sent to server so won't send it again unless it changes");
   }
 };
-
-// export const onMessageListener = () =>
-//   new Promise((resolve) => {
-//     messaging.onMessage((payload) => {
-//       resolve(payload);
-//     });
-//   });

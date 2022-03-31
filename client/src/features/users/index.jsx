@@ -1,21 +1,16 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import {
-  Button,
-  Grid
-} from '@mui/material';
+import { Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
 import { useHistory } from 'react-router-dom';
 
 import usersService from 'services/usersService';
-import {logOut} from 'services/authService';
 import { adaptUsersTableData } from 'helpers/adapter';
-import { routes } from 'configs';
 
 import User from './user/user';
 import styles from './styles';
 import toast from 'react-hot-toast';
-import { getMessage } from 'helpers/helper';
+import M from 'messages';
 
 const UsersPage = () => {
   const useStyles = makeStyles(styles);
@@ -36,7 +31,7 @@ const UsersPage = () => {
           setLoading(false);
         }
       } catch (err) {
-        toast.error(getMessage(err?.response?.data));
+        toast.error(M.get('actionMsg.error.get'));
         setLoading(false);
       }
     },

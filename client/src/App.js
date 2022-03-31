@@ -39,7 +39,7 @@ function App() {
 
   // save token in the server
   useEffect(() => {
-    const timer = setTimeout(() => askForPermissionToReceiveNotifications(), 3000);
+    const timer = setTimeout(() => askForPermissionToReceiveNotifications(), 10000);
     return () => {
       return () => clearTimeout(timer);
     };

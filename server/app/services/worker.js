@@ -16,6 +16,7 @@ const sendFCMMessage = async (user, task) => {
             return res;
         }
     } catch (error) {
+        // todo handle catch
         console.error('sendFCMNotification error...\n', error);
     }
 }
@@ -39,6 +40,7 @@ const checkExpiredTasks = async () => {
             await sendFCMMessage(task.dataValues.user, task);
         }
     } catch (err) {
+        // todo handle catch
         console.log(err, 'worker::sendNotificationWithInterval');
     }
 };

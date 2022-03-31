@@ -10,14 +10,12 @@ const initialState = {
     params: {
       sort: { field: "id", order: "desc" },
       filter: {},
-      limit: 3,
+      limit: 5,
       skip: 0,
     }
   },
   status: 'waiting',
-  createStatus: 'waiting',
-  updateStatus: 'waiting',
-  deleteStatus: 'waiting',
+  actionStatus: 'waiting',
   error: null,
   filterStatus: 'all'
 };
@@ -45,7 +43,6 @@ export const updateTodo = createAsyncThunk(
     const {id, ...data} = todoData;
     const filteredData = {
       name: data.name,
-      description: data.description,
       status: data.status,
       estimatedDate: data.estimatedDate,
     }
@@ -102,53 +99,48 @@ const todoSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(createTodo.pending, (state, action) => {
-        state.createStatus = 'loading';
+        state.actionStatus = 'loading';
       })
       .addCase(createTodo.fulfilled, (state, action) => {
         toast.success(M.get('actionMsg.success.create'));
-        state.createStatus = 'succeeded';
+        state.actionStatus = 'succeeded';
         state.status = 'waiting';
       })
       .addCase(createTodo.rejected, (state, action) => {
         toast.error(M.get('actionMsg.error.create'));
-        state.createStatus = 'failed';
+        state.actionStatus = 'failed';
         state.error = action.error.message;
       })
       .addCase(updateTodo.pending, (state, action) => {
-        state.updateStatus = 'loading';
+        state.actionStatus = 'loading';
       })
       .addCase(updateTodo.fulfilled, (state, action) => {
         toast.success(M.get('actionMsg.success.update'));
-        state.updateStatus = 'succeeded';
+        state.actionStatus = 'succeeded';
         state.status = 'waiting';
       })
       .addCase(updateTodo.rejected, (state, action) => {
         toast.error(M.get('actionMsg.error.update'));
-        state.updateStatus = 'failed';
+        state.actionStatus = 'failed';
         state.error = action.error.message;
       })
       .addCase(deleteTodo.pending, (state) => {
-        state.deleteStatus = 'loading';
+        state.actionStatus = 'loading';
       })
       .addCase(deleteTodo.fulfilled, (state) => {
         toast.success(M.get('actionMsg.success.delete'));
-        state.deleteStatus = 'succeeded';
+        state.actionStatus = 'succeeded';
         state.status = 'waiting';
         state.params.params.skip = 0;
       })
       .addCase(deleteTodo.rejected, (state, action) => {
         toast.error(M.get('actionMsg.error.delete'));
-        state.deleteStatus = 'failed';
+        state.actionStatus = 'failed';
         state.error = action.error.message;
       });
   },
 });
 
 export const { updateFilterStatus, setParams, clearData } = todoSlice.actions;
-
-
-export const selectAllTodoList = (state) => state.todoState.todoList;
-
-export const selectFilterStatus = (state) => state.todoState.filterStatus;
 
 export default todoSlice.reducer;

@@ -10,8 +10,8 @@ import CustomDialog from 'components/dialog';
 import CustomForm from 'components/form';
 import todoService from 'services/todoService';
 import { getMessage } from 'helpers/helper';
-import { reminderValidationSchema } from 'features/todos/validation';
 import { remindTodoOptions } from 'features/todos/config/config';
+import { reminderValidationSchema } from './validation';
 import styles from './styles';
 
 import M from 'messages';

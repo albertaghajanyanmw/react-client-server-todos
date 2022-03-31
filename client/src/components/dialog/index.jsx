@@ -16,7 +16,6 @@ function CustomDialog({ title, description, children, open, handleClose, handleS
   const useStyles = makeStyles(styles);
   const classes = useStyles();
 
-  console.log("dialog")
   return (
     <>
       <div>

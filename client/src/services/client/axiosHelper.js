@@ -29,8 +29,8 @@ if (envSettings.env === 'production') {
     });
 } else {
     service = axios.create({
-        baseURL: `http://localhost:3000/api/`,
-        // baseURL: `http://localhost:4000/api/`,
+        // baseURL: `http://localhost:3000/api/`,
+        baseURL: `http://localhost:4000/api/`,
         timeout: 60000,
     });
 }
