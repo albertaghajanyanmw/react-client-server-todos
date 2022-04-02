@@ -15,7 +15,7 @@ const messaging = firebaseApp.messaging();
 export const askForPermissionToReceiveNotifications = async () => {
   try {
     await messaging.requestPermission();
-    messaging.usePublicVapidKey(process.env.REACT_APP_PUBLIC_VAPID_KEY_ORG);
+    messaging.usePublicVapidKey(process.env.REACT_APP_PUBLIC_VAPID_KEY);
     const token = await messaging.getToken();
     sendTokenToServer(token);
     messaging.onTokenRefresh(() => {
@@ -65,3 +65,11 @@ const sendTokenToServer = async (token) => {
     console.log("Token already sent to server so won't send it again unless it changes");
   }
 };
+
+// handle foreground message
+export const onMessageListener = () =>
+  new Promise((resolve) => {
+    messaging.onMessage((payload) => {
+      resolve(payload);
+    });
+  });

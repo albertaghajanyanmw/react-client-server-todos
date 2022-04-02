@@ -1,22 +1,13 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser');
-const webpush = require('web-push')
 const cors = require("cors");
 const routes = require('./app/routes');
 const worker = require('./app/services/worker');
-const { firebase: { webPushContact, publicVapidKey, privateVapidKey } } = require('./app/settings');
-
-webpush.setVapidDetails(webPushContact, publicVapidKey, privateVapidKey);
 
 const app = express();
 
-
 worker.start();
-// var corsOptions = {
-//   origin: "http://localhost:8081"
-// };
-// app.use(cors(corsOptions));
 app.use(cors());
 
 // parse requests of content-type - application/json
@@ -31,24 +22,6 @@ app.use(function(req, res, next) {
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.post('/notifications/subscribe', (req, res) => {
-  const subscription = req.body
-  const payload = JSON.stringify({
-    title: 'Hello!',
-    body: 'It works.',
-  })
-
-  webpush.sendNotification(subscription, payload)
-    .then(result => {
-      // todo
-    })
-    .catch(e => {
-      // todo
-    })
-
-  res.status(200).json({'success': true})
-});
 
 app.use('/api', routes);
 

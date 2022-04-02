@@ -59,7 +59,7 @@ module.exports.create = async (req, res) => {
         const firebaseToken = user.firebaseToken;
         const messagePayload = {
             title: `Created Todo.`,
-            body: ` Hi ${user.firstName}. New todo.\n { ID: ${createdTask.id}, NAME: ${createdTask.name} }`
+            body: ` Hi ${user.firstName || user.nickName}. Created new todo.\n { ID: ${createdTask.id}, NAME: ${createdTask.name} }`
         };
         await transaction.commit();
         notificationService.sendFCMNotification(messagePayload.title, messagePayload.body, firebaseToken);

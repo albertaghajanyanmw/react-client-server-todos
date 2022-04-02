@@ -10,6 +10,7 @@ const { backgroundSync, routing, strategies } = workbox
 
 const backSync = new backgroundSync.BackgroundSyncPlugin('addTask')
 
+// todo update url
 routing.registerRoute(
   new RegExp('http://localhost:4000/api/tasks'),
   new strategies.NetworkOnly({ plugins: [backSync] }),

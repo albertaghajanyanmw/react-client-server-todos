@@ -28,9 +28,9 @@ export function register(config) {
       // serve assets; see https://github.com/facebook/create-react-app/issues/2374
       return;
     }
-
     window.addEventListener('load', () => {
-      const swFileName = process.env.NODE_ENV === 'production' ? 'service-worker.js' : 'service-worker-sync.js'
+      console.log("process.env. = ", process.env.REACT_APP_API_URL)
+      const swFileName = process.env.NODE_ENV === 'production' ? 'service-worker-sync.js' : 'service-worker-sync.js'
       const swUrl = `${process.env.PUBLIC_URL}/${swFileName}`;
 
       if (isLocalhost) {

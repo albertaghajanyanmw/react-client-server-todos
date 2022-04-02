@@ -1,5 +1,5 @@
 {
   "env": "develop",
-  "host": "http://54.234.251.111",
-  "port": 3000
+  "host": "http://localhost",
+  "port": 4000
 }

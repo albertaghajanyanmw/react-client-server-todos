@@ -14,6 +14,7 @@ class NotificationService {
 
     async sendFCMNotification(title, body, registrationTokens, userId) {
         return new Promise(async (resolve, reject) => {
+            console.log("...sendFCMNotification")
             const message = {
                 notification: {
                     title: title,

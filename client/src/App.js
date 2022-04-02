@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
 
 import { BrowserRouter, Switch, Route, useHistory } from 'react-router-dom';
@@ -19,12 +19,6 @@ import { Toaster } from 'react-hot-toast';
 import CircularLoading from 'components/loading/Loading';
 import { askForPermissionToReceiveNotifications } from 'firebase/pushNotification';
 
-// pages
-// const LoginPage = React.lazy(() => import('features/auth/login'));
-// const RegistrationPage = React.lazy(() => import('features/auth/registration'));
-// const UsersPage = React.lazy(() => import('features/users'));
-// const TodoList = React.lazy(() => import('features/todos'));
-
 const useStyles = makeStyles(() => ({
   root: {
     display: 'block',
@@ -39,7 +33,7 @@ function App() {
 
   // save token in the server
   useEffect(() => {
-    const timer = setTimeout(() => askForPermissionToReceiveNotifications(), 10000);
+    const timer = setTimeout(() => askForPermissionToReceiveNotifications(), 3000);
     return () => {
       return () => clearTimeout(timer);
     };
