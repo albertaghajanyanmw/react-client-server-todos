@@ -1,5 +1,4 @@
 import axios from 'axios';
-import envSettings from 'configs/envSettings.json';
 import cookie from 'react-cookies';
 import onUnauthorized from 'helpers/errorHandlers';
 
@@ -22,9 +21,10 @@ const defaultHeaderHandler = request => {
 };
 
 let service;
-if (envSettings.env === 'production') {
+
+if (process.env.REACT_APP_ENV_MODE === 'production') {
     service = axios.create({
-        baseURL: `${envSettings.host}/api/`,
+        baseURL: `${process.env.REACT_APP_API_URL}/api/`,
         timeout: 60000,
     });
 } else {
