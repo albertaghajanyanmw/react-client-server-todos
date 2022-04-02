@@ -6,9 +6,9 @@ services:
     restart: always
     build: ./server
     # uncomment network_mode variable to be able to run docker in localhost
-    network_mode: host
-    # ports:
-        # - "4000:4000"
+    # network_mode: host
+    ports:
+        - "4000:4000"
     environment:
        DATABASE_HOST: ''
        DATABASE_PASSWORD: ''

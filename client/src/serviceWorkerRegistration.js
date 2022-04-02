@@ -29,7 +29,6 @@ export function register(config) {
       return;
     }
     window.addEventListener('load', () => {
-      console.log("process.env. = ", process.env.REACT_APP_API_URL)
       const swFileName = process.env.NODE_ENV === 'production' ? 'service-worker-sync.js' : 'service-worker-sync.js'
       const swUrl = `${process.env.PUBLIC_URL}/${swFileName}`;
 
