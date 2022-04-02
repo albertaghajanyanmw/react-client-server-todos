@@ -31,14 +31,6 @@ function App() {
 
   setupInterceptors(history);
 
-  // save token in the server
-  useEffect(() => {
-    const timer = setTimeout(() => askForPermissionToReceiveNotifications(), 3000);
-    return () => {
-      return () => clearTimeout(timer);
-    };
-  }, []);
-
   return (
     <div className={classNames(classes.root, 'App')}>
       <Suspense fallback={<CircularLoading />}>

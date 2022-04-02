@@ -1,13 +1,12 @@
 const jwt = require('jsonwebtoken');
 const jwtDecode = require('jwt-decode');
-const {StatusCodes, getReasonPhrase} = require('http-status-codes');
 const {CONSTANTS} = require('constants/Constants');
 const { loginSecretKey } = require('settings');
 
 const verifyToken = async (request, response, next, token, secret) => {
     try {
         if(!token) {
-            return response.status(StatusCodes.UNAUTHORIZED).send(getReasonPhrase(StatusCodes.UNAUTHORIZED));
+            return response.status(401).send({message: 'Unauthorized'});
         }
         const verified = await jwt.verify(token, secret);
         request.user = verified;
@@ -15,7 +14,7 @@ const verifyToken = async (request, response, next, token, secret) => {
         request.guid = decodedToken.guid;
         next();
     } catch(err) {
-        response.status(StatusCodes.UNAUTHORIZED).send();
+        response.status(401).send();
     }
 };
 
@@ -24,7 +23,7 @@ module.exports.verifyLoginToken = async (request, response, next) => {
         const token = request.header(CONSTANTS.AUTHORIZATION).split(CONSTANTS.BEARER)[1];
         verifyToken(request, response, next, token, loginSecretKey);
     } catch(err) {
-        response.status(StatusCodes.UNAUTHORIZED).send(getReasonPhrase(StatusCodes.UNAUTHORIZED));
+        return response.status(401).send({message: 'Unauthorized'});
     }
 };
 
@@ -33,6 +32,6 @@ module.exports.verifyRegisterToken = async (request, response, next) => {
         const token = request.params.token;
         verifyToken(request, response, next, token, invitationSecretToken);
     } catch(err) {
-        response.status(StatusCodes.UNAUTHORIZED).send(getReasonPhrase(StatusCodes.UNAUTHORIZED));
+        return response.status(401).send({message: 'Unauthorized'});
     }
 };

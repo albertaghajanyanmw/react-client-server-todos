@@ -11,6 +11,7 @@ import { routes } from 'configs/index';
 import styles from './styles';
 import { Grid } from '@mui/material';
 import CustomAppBar from 'components/navbar';
+import { askForPermissionToReceiveNotifications } from 'firebase/pushNotification';
 
 const useStyles = makeStyles(styles);
 
@@ -21,6 +22,18 @@ function PrivateRoute({ component: Component, ...rest }) {
 
   const history = useHistory();
   const [loading, setLoading] = useState(true);
+
+  // save token in the server
+  useEffect(() => {
+    let timer;
+    if (currentUser) {
+      console.log('currentUser', currentUser);
+      timer = setTimeout(() => askForPermissionToReceiveNotifications(), 3000);
+    }
+    return () => {
+      return () => clearTimeout(timer);
+    };
+  }, [currentUser]);
 
   useEffect(() => {
     const navigateToLogin = () => {

@@ -1,4 +1,3 @@
-const {StatusCodes: {INTERNAL_SERVER_ERROR}} = require('http-status-codes');
 const schedule = require('node-schedule')
 const responseBuilder = require('helpers/errorResponseBodyBuilder');
 const { users: Users, tasks: Tasks, sequelize } = require('models');
@@ -16,7 +15,7 @@ module.exports.getAllTasks = async (req, res) => {
         return res.json({ count: count, data: rows });
     } catch(err) {
         return res
-            .status(INTERNAL_SERVER_ERROR)
+            .status(500)
             .json(responseBuilder.couldNotGetCriteria(CONSTANTS.TypeNames.TASKS.toLowerCase()));
     }
 };
@@ -29,7 +28,7 @@ module.exports.getTasks = async (req, res) => {
         return res.json({ count: count, data: rows });
     } catch(err) {
         return res
-            .status(INTERNAL_SERVER_ERROR)
+            .status(500)
             .json(responseBuilder.couldNotGetCriteria(CONSTANTS.TypeNames.TASKS.toLowerCase()));
     }
 };
@@ -40,7 +39,7 @@ module.exports.getTask = async (req, res) => {
         return res.json(task);
     } catch {
         return res
-        .status(INTERNAL_SERVER_ERROR)
+        .status(500)
         .json(responseBuilder.couldNotGetCriteria(CONSTANTS.TypeNames.TASK.toLowerCase()));
     }
 };
@@ -69,7 +68,7 @@ module.exports.create = async (req, res) => {
             transaction.rollback();
         }
         return res
-            .status(INTERNAL_SERVER_ERROR)
+            .status(500)
             .json(responseBuilder.couldNotAddCriteria(CONSTANTS.TypeNames.TASK.toLowerCase()));
     }
 };
@@ -90,7 +89,7 @@ module.exports.update = async (req, res) => {
         return res.json({ task: updatedTask, message: 'Task has been updated.' });
     } catch(err) {
         return res
-            .status(INTERNAL_SERVER_ERROR)
+            .status(500)
             .json(responseBuilder.couldNotUpdateCriteria(CONSTANTS.TypeNames.TASK.toLowerCase()));
     }
 };
@@ -108,7 +107,7 @@ module.exports.delete = async (req, res) => {
         }
         return res.json({ message: 'Task has been deleted.' });
     } catch(err) {
-        return res.status(INTERNAL_SERVER_ERROR).json({ message: 'Error to delete new task.' });
+        return res.status(500).json({ message: 'Error to delete new task.' });
     }
 };
 
@@ -131,6 +130,6 @@ module.exports.scheduleReminder = async (req, res) => {
         schedule.scheduleJob(date, () => getTokenAndSendNotification(req));
         return res.json({ message: 'Successfully scheduled reminder.' });
     } catch(err) {
-        return res.status(INTERNAL_SERVER_ERROR).json({ message: 'Error to schedule reminder for a task.' });
+        return res.status(500).json({ message: 'Error to schedule reminder for a task.' });
     }
 }

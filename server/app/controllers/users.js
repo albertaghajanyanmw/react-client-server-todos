@@ -1,5 +1,4 @@
 
-const {StatusCodes} = require('http-status-codes');
 const { users: Users, tasks: Tasks } = require('models');
 const { isSchemeValidSync } = require('helpers/validate');
 const { users: usersValidator } = require('schemes');
@@ -13,7 +12,7 @@ module.exports.getUsers = async (req, res) => {
         })
         .catch((err) => {
             return response
-            .status(StatusCodes.INTERNAL_SERVER_ERROR)
+            .status(500)
             .json(
                 responseBuilder.couldNotGetCriteria(CONSTANTS.TypeNames.USERS.toLowerCase())
             );
