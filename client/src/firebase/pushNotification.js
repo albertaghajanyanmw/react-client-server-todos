@@ -4,11 +4,13 @@ import usersService from "services/usersService";
 import { isLoggedIn } from "services/authService";
 
 export const initializeFirebase = () => {
-  navigator.serviceWorker
+  if (navigator.serviceWorker) {
+    navigator.serviceWorker
     .register('./service-worker-sync.js')
     .then( (registration) => {
         firebaseApp.messaging().useServiceWorker(registration);
     });
+  }
 }
 
 const messaging = firebaseApp.messaging();
