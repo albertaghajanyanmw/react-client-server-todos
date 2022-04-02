@@ -17,7 +17,6 @@ import { routes } from 'configs/index';
 import './App.css';
 import { Toaster } from 'react-hot-toast';
 import CircularLoading from 'components/loading/Loading';
-import { askForPermissionToReceiveNotifications } from 'firebase/pushNotification';
 
 const useStyles = makeStyles(() => ({
   root: {

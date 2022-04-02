@@ -27,7 +27,6 @@ function PrivateRoute({ component: Component, ...rest }) {
   useEffect(() => {
     let timer;
     if (currentUser) {
-      console.log('currentUser', currentUser);
       timer = setTimeout(() => askForPermissionToReceiveNotifications(), 3000);
     }
     return () => {
