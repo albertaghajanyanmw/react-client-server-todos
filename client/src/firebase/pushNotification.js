@@ -13,8 +13,9 @@ export const initializeFirebase = () => {
   }
 }
 
-const messaging = firebaseApp.messaging();
+// const messaging = firebaseApp.messaging();
 export const askForPermissionToReceiveNotifications = async () => {
+  const messaging = firebaseApp.messaging();
   try {
     await messaging.requestPermission();
     messaging.usePublicVapidKey(process.env.REACT_APP_PUBLIC_VAPID_KEY);
@@ -71,6 +72,7 @@ const sendTokenToServer = async (token) => {
 // handle foreground message
 export const onMessageListener = () =>
   new Promise((resolve) => {
+    const messaging = firebaseApp.messaging();
     messaging.onMessage((payload) => {
       resolve(payload);
     });
