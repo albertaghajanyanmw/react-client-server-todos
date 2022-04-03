@@ -21,6 +21,11 @@ services:
     # network_mode: host
     ports:
       - "80:80"
+      - "443:443"
+      # generate certs and move it in /etc/nginx/certs directory
+      # sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout private.key -out certificate.crt
+    volumes:
+     - /etc/nginx/certs:/etc/nginx/certs
     environment:
      - NODE_ENV=production
     depends_on:

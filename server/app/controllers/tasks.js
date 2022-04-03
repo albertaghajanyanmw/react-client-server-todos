@@ -61,7 +61,7 @@ module.exports.create = async (req, res) => {
             body: ` Hi ${user.firstName || user.nickName}. Created new todo.\n { ID: ${createdTask.id}, NAME: ${createdTask.name} }`
         };
         await transaction.commit();
-        notificationService.sendFCMNotification(messagePayload.title, messagePayload.body, firebaseToken);
+        notificationService.sendFCMNotification(messagePayload.title, messagePayload.body, firebaseToken, req.user.id);
         return res.json({ task: createdTask, message: 'Task has been created.' });
     } catch(err) {
         if (transaction) {
