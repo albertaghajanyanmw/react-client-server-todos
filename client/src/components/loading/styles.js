@@ -5,6 +5,5 @@ export default () => ({
     justifyContent: 'center',
 		height: '100%',
     alignItems: 'center'
-    // marginTop: '32%',
   }
 });

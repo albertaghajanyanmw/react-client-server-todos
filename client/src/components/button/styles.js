@@ -1,5 +1,3 @@
-import { grey } from "@mui/material/colors";
-
 // todo: add and using all variables from theme
 export default (theme) => ({
     btn: {

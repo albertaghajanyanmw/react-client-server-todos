@@ -1,5 +1,4 @@
 // todo: add and using all variables from theme
-
 export default (theme) => ({
   container: {
     margin: 'auto',

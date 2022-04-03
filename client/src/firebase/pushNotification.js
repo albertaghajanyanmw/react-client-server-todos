@@ -1,5 +1,5 @@
-import firebaseApp from './firebaseApp';
 import 'firebase/messaging';
+import firebaseApp from './firebaseApp';
 import usersService from "services/usersService";
 import { isLoggedIn } from "services/authService";
 

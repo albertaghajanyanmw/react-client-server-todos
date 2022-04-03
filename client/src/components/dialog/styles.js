@@ -1,5 +1,5 @@
 // todo: add and using all variables from theme
-export default (theme) => ({
+export default () => ({
   modal: {
     minWidth: 500,
     maxWidth: 500,

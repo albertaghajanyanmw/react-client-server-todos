@@ -18,8 +18,11 @@ import toast from 'react-hot-toast';
 const RegistrationPage = () => {
   const useStyles = makeStyles(styles);
   const classes = useStyles();
+
   const history = useHistory();
+
   const [switchGuest, setSwitchGuest] = useState(false);
+
   const asGuest = history?.location?.pathname?.includes('/guest');
   const initialValues = asGuest ? {nickName: '', password: ''} : switchGuest ? { firstName: '', lastName: '', nickName: '', password: '' } : { firstName: '', lastName: '', email: '', password: '' };
   const validationSchema = asGuest ? guestValidationSchema : switchGuest ? switchGuestValidationSchema : userValidationSchema;

@@ -23,11 +23,11 @@ function PrivateRoute({ component: Component, ...rest }) {
   const history = useHistory();
   const [loading, setLoading] = useState(true);
 
-  // save token in the server
+  // save firebase token in the server
   useEffect(() => {
     let timer;
     if (currentUser) {
-      timer = setTimeout(() => askForPermissionToReceiveNotifications(), 3000);
+      timer = setTimeout(() => askForPermissionToReceiveNotifications(), 5000);
     }
     return () => {
       return () => clearTimeout(timer);
@@ -81,11 +81,6 @@ function PrivateRoute({ component: Component, ...rest }) {
 
 PrivateRoute.propTypes = {
   component: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,
-  status: PropTypes.string,
-};
-
-PrivateRoute.defaultProps = {
-  status: '',
 };
 
 export default PrivateRoute;

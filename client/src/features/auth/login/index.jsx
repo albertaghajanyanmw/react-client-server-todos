@@ -18,6 +18,7 @@ import styles from './styles';
 const LoginPage = () => {
   const useStyles = makeStyles(styles);
   const classes = useStyles();
+
   const history = useHistory();
 
   const asGuest = history.location.pathname.includes('/guest');

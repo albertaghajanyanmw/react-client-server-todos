@@ -63,7 +63,7 @@ const Reminder = ({ todo, openReminder, handleCloseReminder }) => {
 };
 
 Reminder.propTypes = {
-  // todo change to shape add fields description
+  // todo change to shape and add fields description
   todo: PropTypes.instanceOf(Object).isRequired,
   openReminder: PropTypes.bool,
   handleCloseReminder: PropTypes.func

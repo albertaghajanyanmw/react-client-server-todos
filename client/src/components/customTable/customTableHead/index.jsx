@@ -73,15 +73,9 @@ function CustomTableHead(props) {
             </TableCell>
           );
         })}
-        {withEditAction && (
-          <TableCell style={{ width: '24px', paddingRight: '16px', paddingLeft: '24px' }} />
-        )}
-        {withDeleteAction && (
-          <TableCell style={{ width: '24px', paddingRight: '16px', paddingLeft: '24px' }} />
-        )}
-        {withReminderAction && (
-          <TableCell style={{ width: '24px', paddingRight: '16px', paddingLeft: '24px' }} />
-        )}
+        {withEditAction && ( <TableCell style={{ width: '24px', paddingRight: '16px', paddingLeft: '24px' }} /> )}
+        {withDeleteAction && ( <TableCell style={{ width: '24px', paddingRight: '16px', paddingLeft: '24px' }} /> )}
+        {withReminderAction && ( <TableCell style={{ width: '24px', paddingRight: '16px', paddingLeft: '24px' }} /> )}
       </TableRow>
     </TableHead>
   );

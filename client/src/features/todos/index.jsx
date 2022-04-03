@@ -39,9 +39,11 @@ const TodoList = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const [mode, setMode] = useState({ isEdit: false, currentTodo: {} });
   const [open, handleOpen, handleClose] = useModal(false);
   const [openReminder, handleOpenReminder, handleCloseReminder] = useModal(false);
+
+  const [mode, setMode] = useState({ isEdit: false, currentTodo: {} });
+
   const todoState = useSelector((state) => state.todoState);
   const { todoList, count, status, filterStatus, params: filteredParams } = todoState;
   const { searchFields } = tableOptions.todo;
@@ -183,11 +185,7 @@ const TodoList = () => {
       }
       if (searchFields && oldValue !== value) {
         const newFilter = {
-          params: {
-            ...filteredParams.params,
-            search: { value, fields: searchFields },
-            skip: 0,
-          },
+          params: { ...filteredParams.params, search: { value, fields: searchFields }, skip: 0 },
         };
         if (!value) {
           delete newFilter.params.search;
