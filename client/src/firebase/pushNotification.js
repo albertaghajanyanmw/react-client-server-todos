@@ -44,7 +44,7 @@ export const askForPermissionToReceiveNotifications = async () => {
       }
     });
   } catch (error) {
-    console.error(error);
+    console.log(error);
   }
 };
 
