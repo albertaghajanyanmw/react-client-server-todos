@@ -9,7 +9,7 @@ services:
     # network_mode: host
     ports:
         - "4000:4000"
-    volumes:
+    #volumes:
     #  - /opt/<projectName>/logs/server:/usr/src/app/log
     environment:
        DATABASE_HOST: ''
