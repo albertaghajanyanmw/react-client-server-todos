@@ -22,7 +22,7 @@ const LoginPage = () => {
   const history = useHistory();
 
   const asGuest = history.location.pathname.includes('/guest');
-  const initialValues = asGuest ? {nickName: ''} : { email: '', password: '' };
+  const initialValues = asGuest ? {nickName: '', password: ''} : { email: '', password: '' };
   const validationSchema = asGuest ? guestValidationSchema : userValidationSchema;
 
   const formik = useFormik({

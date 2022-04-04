@@ -4,19 +4,22 @@ import usersService from "services/usersService";
 import { isLoggedIn } from "services/authService";
 
 export const initializeFirebase = () => {
-  if (navigator.serviceWorker) {
-    navigator.serviceWorker
-    .register('./service-worker-sync.js')
-    .then( (registration) => {
+  try {
+    if (navigator.serviceWorker) {
+      navigator.serviceWorker
+      .register('./service-worker-sync.js')
+      .then( (registration) => {
         firebaseApp.messaging().useServiceWorker(registration);
-    });
+      });
+    }
+  } catch(err) {
+    // todo: handle error
   }
 }
 
-// const messaging = firebaseApp.messaging();
 export const askForPermissionToReceiveNotifications = async () => {
-  const messaging = firebaseApp.messaging();
   try {
+    const messaging = firebaseApp.messaging();
     await messaging.requestPermission();
     messaging.usePublicVapidKey(process.env.REACT_APP_PUBLIC_VAPID_KEY);
     const token = await messaging.getToken();
