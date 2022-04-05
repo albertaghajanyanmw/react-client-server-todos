@@ -62,7 +62,7 @@ module.exports.create = async (req, res) => {
         };
         await transaction.commit();
         notificationService.sendFCMNotification(messagePayload.title, messagePayload.body, firebaseToken, req.user.id);
-        return res.json({ task: createdTask, message: 'Task has been created.' });
+        return res.status(200).json({ task: createdTask, message: 'Task has been created.' });
     } catch(err) {
         if (transaction) {
             transaction.rollback();

@@ -6,16 +6,16 @@ if (workbox) {
   console.log('Failed to load Workbox.');
 }
 
-const { backgroundSync, routing, strategies } = workbox
+const { backgroundSync, routing, strategies } = workbox;
 
-const backSync = new backgroundSync.BackgroundSyncPlugin('addTask')
+const backSync = new backgroundSync.BackgroundSyncPlugin('addTask');
 
 // todo update url
 routing.registerRoute(
   new RegExp('http://localhost:4000/api/tasks'),
   new strategies.NetworkOnly({ plugins: [backSync] }),
   'POST'
-)
+);
 
 const handlePush = (event) => {
   const data = event.data.json()
@@ -28,12 +28,12 @@ const handlePush = (event) => {
   );
 }
 
-self.addEventListener('push', handlePush)
+self.addEventListener('push', handlePush);
 
 routing.registerRoute(
   /\.(?:css|html|js|svg)$/,
   new strategies.StaleWhileRevalidate({ cacheName: 'static' })
-)
+);
 
 // if (process.env.NODE_ENV === 'production') {
 //   precaching.precacheAndRoute(self.__WB_MANIFEST)

@@ -7,13 +7,14 @@ export const initializeFirebase = () => {
   try {
     if (navigator.serviceWorker) {
       navigator.serviceWorker
-      .register('./service-worker-sync.js')
+      .register('/service-worker-sync.js', { scope: '/' })
       .then( (registration) => {
         firebaseApp.messaging().useServiceWorker(registration);
       });
     }
   } catch(err) {
     // todo: handle error
+    console.log("Error = ", err)
   }
 }
 
