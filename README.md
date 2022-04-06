@@ -6,7 +6,7 @@ TODO
 ```
 ### 2. Install and run guide for development mode.
 ------------------------------
-Install all requirements in both parts (client, server)
+#### Install all requirements in both parts (client, server)
 #### server
 ```
 cd server
@@ -19,7 +19,10 @@ npm ci
 ```
 ------------------------------
 ------------------------------
-### 3. Runs the app in the development mode.
+#### Runs the app in the development mode.
+```
+Make sure you are added correct variables in .env files (client/.env, server/.env)
+```
 #### server
 ```
 cd server
@@ -32,8 +35,15 @@ npm start
 ```
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 ------------------------------
-### 3. Runs the app in via docker.
+### 3. Runs the app via docker.
+#### install docker and docker-compose
 ```
-$ bash run-docker-containers-local.sh
+DOCKER         - https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04-ru
+
+DOCKER COMPOSE - https://docs.docker.com/compose/install/
+
+```
+```
+bash run-docker-containers-local.sh
 ```
 Open [http://localhost:80](http://localhost:80) to view it in the browser.
