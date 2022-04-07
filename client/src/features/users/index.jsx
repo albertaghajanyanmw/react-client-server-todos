@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Grid, Typography } from '@mui/material';
+import { Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import toast from 'react-hot-toast';
-
+import PropTypes from 'prop-types';
 import usersService from 'services/usersService';
 import { adaptUsersTableData } from 'helpers/adapter';
 
@@ -57,6 +57,10 @@ const UsersPage = ({ title }) => {
       </Grid>
     </div>
   );
+};
+
+UsersPage.propTypes = {
+  title: PropTypes.string.isRequired,
 };
 
 export default UsersPage;
