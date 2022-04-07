@@ -20,9 +20,7 @@ npm ci
 ------------------------------
 ------------------------------
 #### Runs the app in the development mode.
-```
-Make sure you are added correct variables in .env files (client/.env, server/.env)
-```
+
 #### server
 ```
 cd server
@@ -47,3 +45,39 @@ DOCKER COMPOSE - https://docs.docker.com/compose/install/
 bash run-docker-containers-local.sh
 ```
 Open [http://localhost:80](http://localhost:80) to view it in the browser.
+
+```
+Make sure you are added correct variables in .env files (client/.env, server/.env)
+```
+
+##### ENV
+>  client
+
+```
+REACT_APP_API_URL=" "
+REACT_APP_ENV_MODE=" "
+REACT_APP_PUBLIC_VAPID_KEY=" "
+```
+
+>  server
+
+```
+key=""
+
+MAIL_HOST=""
+MAIL_PORT=
+MAIL_USER=""
+MAIL_PASSWORD=""
+API_URL=
+CLIENT_URL=
+
+DB_USERNAME=
+DB_PASSWORD=
+DB_DATABASE=" "
+DB_HOST=127.0.0.1
+DB_DIALECT=mysql
+DB_PORT=3306
+DB_CONNECTION_LIMIT=10
+
+LOGIN_SECRET_KEY=
+```
