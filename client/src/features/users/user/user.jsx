@@ -41,7 +41,7 @@ const User = ({ user }) => {
             __html: user.firebaseToken ? 'Has token' : 'No token',
           }}
           variant="body2"
-          color="textSecondary"
+          color={user.firebaseToken ? "green" : "red"}
           component="p"
         />
       </CardContent>

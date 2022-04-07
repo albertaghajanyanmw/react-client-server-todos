@@ -45,16 +45,14 @@ const UsersPage = () => {
     <CircularLoading />
   ) : (
     <div className={classes.content}>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-        <Grid m={2} spacing={2} container className={classes.itemsContent}>
-          {usersData.data.map((user) => (
-            <Grid className={classes.grid} key={user.id} item xs={12} sm={6} md={4} lg={3}>
-              <User user={user} />
-            </Grid>
-          ))}
-        </Grid>
-      </main>
+      <div className={classes.toolbar} />
+      <Grid m={2} spacing={2} container className={classes.itemsContent}>
+        {usersData.data.map((user) => (
+          <Grid className={classes.mGrid} key={user.id} item xs={12} sm={6} md={4} lg={3}>
+            <User user={user} />
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 };
