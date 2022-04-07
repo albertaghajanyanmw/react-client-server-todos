@@ -13,7 +13,6 @@ export const initializeFirebase = () => {
       });
     }
   } catch(err) {
-    // todo: handle error
     console.log("Error = ", err)
   }
 }
@@ -21,7 +20,7 @@ export const initializeFirebase = () => {
 export const askForPermissionToReceiveNotifications = async () => {
   try {
     const messaging = firebaseApp.messaging();
-    const permissionStatus = await messaging.requestPermission();
+    await messaging.requestPermission();
     messaging.usePublicVapidKey(process.env.REACT_APP_PUBLIC_VAPID_KEY);
     const token = await messaging.getToken();
     sendTokenToServer(token);

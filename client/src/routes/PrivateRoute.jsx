@@ -11,6 +11,7 @@ import styles from './styles';
 import { Grid } from '@mui/material';
 import CustomAppBar from 'components/navbar';
 import { askForPermissionToReceiveNotifications } from 'firebase/pushNotification';
+import CircularLoading from 'components/loading/Loading';
 
 const useStyles = makeStyles(styles);
 
@@ -48,8 +49,7 @@ function PrivateRoute({ component: Component, ...rest }) {
     }
   }, [currentUser, history]);
 
-  // todo add Loading component
-  if (loading) return <div className={classes.loadingRoot}>... Loading</div>;
+  if (loading) return <div className={classes.loadingRoot}><CircularLoading /></div>;
 
   return (
     <Route
