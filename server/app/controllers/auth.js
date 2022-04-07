@@ -34,7 +34,7 @@ const login = async (request, user) => {
         return {success: true, token};
 
     } catch(error) {
-        return {success: false, status: 500, message: 'Internal server error'};
+        return {success: false, status: 500, message: 'Internal server error', error};
     }
 };
 
@@ -56,10 +56,13 @@ module.exports.postLoginGuest = async (request, response) => {
         const user = await Users.findOne({where: { nickName: request.body.nickName }});
         const result = await login(request, user);
         if(!result.success) {
+            console.log("\n\n result", result);
+
             return response.status(result.status).json({message: result.message});
         }
         return response.header(CONSTANTS.AUTHORIZATION, result.token).json({ success: true, token: result.token, ...user.dataValues });
     } catch(error) {
+        console.log("\n\n error", error);
         return response.status(500).json({message: 'Internal server error'});
     }
 };

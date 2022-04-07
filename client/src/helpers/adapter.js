@@ -1,5 +1,25 @@
 import { dateFormat } from "./helper";
 
+const createUsersTableData = (id, firstName, lastName, nickName, email, image, firebaseToken) => ({ id, firstName, lastName, nickName, email, image, firebaseToken });
+
+const adaptUsersTableData = (data) => {
+  const dataList = [];
+  data.forEach((item) => {
+    dataList.push(
+      createUsersTableData(
+        item.id,
+        item.firstName,
+        item.lastName,
+        item.nickName,
+        item.email,
+        item.image,
+        item.firebaseToken
+      )
+    );
+  });
+  return dataList;
+};
+
 const createTodoTableData = (id, name, estimatedDate, estimatedDateOrg, status, userName) => ({ id, name, estimatedDate, estimatedDateOrg, status, userName });
 
 const adaptTodoTableData = (data) => {
@@ -20,4 +40,4 @@ const adaptTodoTableData = (data) => {
   return dataList;
 };
 
-export { adaptTodoTableData };
+export { adaptUsersTableData, adaptTodoTableData };

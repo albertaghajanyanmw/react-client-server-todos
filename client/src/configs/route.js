@@ -19,6 +19,9 @@ const routes = {
     path: '/registration/guest',
     title: 'pages.registration'
   },
+  users: {
+    path: '/users',
+  },
   todo: {
     path: '/todo',
   }
