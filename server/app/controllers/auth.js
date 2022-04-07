@@ -22,8 +22,8 @@ const login = async (request, user) => {
                 id: user.id,
                 nickName: user.nickName,
                 email: user.email,
-                is_active: user.is_active,
-                created_date: user.created_date,
+                isActive: user.is_active,
+                createdDate: user.created_date,
                 firebaseToken: user.firebaseToken,
                 firstName: user.firstName,
                 lastName: user.lastName
@@ -140,7 +140,7 @@ module.exports.registerGuest = async (req, res) => {
     }
 };
 
-module.exports.activate = async (req, res, next) => {
+module.exports.activate = async (req, res) => {
     try {
         const activationLink = req.params.link;
         const user = await Users.findOne({activationLink});

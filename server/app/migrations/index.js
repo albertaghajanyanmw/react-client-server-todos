@@ -29,7 +29,7 @@ class DBMigration {
 
     logEvent(eventName) {
         return (name) => {
-            // this.log.debug(`${name} ${eventName}`);
+            // console.log(`${name} ${eventName}`);
         };
     }
 

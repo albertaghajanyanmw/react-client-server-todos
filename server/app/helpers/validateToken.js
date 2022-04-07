@@ -26,12 +26,3 @@ module.exports.verifyLoginToken = async (request, response, next) => {
         return response.status(401).send({message: 'Unauthorized'});
     }
 };
-
-module.exports.verifyRegisterToken = async (request, response, next) => {
-    try {
-        const token = request.params.token;
-        verifyToken(request, response, next, token, invitationSecretToken);
-    } catch(err) {
-        return response.status(401).send({message: 'Unauthorized'});
-    }
-};
