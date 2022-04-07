@@ -8,7 +8,7 @@ const sendFCMMessage = async (user, task) => {
         const payload = {
             title: `Expired Todo.`,
             body: `
-                Hi ${user.dataValues.firstName}. You have an expired todo.\n
+                Hi ${user.dataValues.firstName || user.dataValues.nickName}. You have an expired todo.\n
                 { ID: ${task.dataValues.id}, NAME: ${task.dataValues.name} }`,
         };
         if (firebaseToken) {
