@@ -17,7 +17,12 @@ RUN npm run build
 # production environment
 FROM nginx:1.16.0-alpine
 COPY --from=build /app/build /usr/share/nginx/html
+# comment this line to run in local
 COPY --from=build /app/nginx.conf /etc/nginx/conf.d/default.conf
+
+COPY --from=build /app/ssl/certificate.crt /etc/nginx/certs/certificate.crt
+COPY --from=build /app/ssl/private.pem /etc/nginx/certsprivate.pem
+
 # uncomment this line to run in local
 # COPY --from=build /app/nginx-local.conf /etc/nginx/conf.d/default.conf
 
