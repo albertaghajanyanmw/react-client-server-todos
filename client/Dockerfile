@@ -21,7 +21,7 @@ COPY --from=build /app/build /usr/share/nginx/html
 COPY --from=build /app/nginx.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=build /app/ssl/certificate.crt /etc/nginx/certs/certificate.crt
-COPY --from=build /app/ssl/private.pem /etc/nginx/certsprivate.pem
+COPY --from=build /app/ssl/private.pem /etc/nginx/certsprivate.key
 
 # uncomment this line to run in local
 # COPY --from=build /app/nginx-local.conf /etc/nginx/conf.d/default.conf
