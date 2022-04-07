@@ -32,7 +32,7 @@ const LoginPage = () => {
       try {
         const result = await AuthService.login(values, asGuest);
         localStorage.setItem(lsConstants.CURRENT_USER, JSON.stringify(result.data));
-        history.push(routes.users.path);
+        history.push(routes.todo.path);
       } catch (err) {
         toast.error(M.get('login.errors.common'));
       }

@@ -29,20 +29,6 @@ module.exports.getUser = async (req, res) => {
         });
 };
 
-module.exports.notificationsSubscribe = async (req, res) => {
-    try {
-        const user = await Users.findByPk(req.params.id);
-        if (!user) {
-            return res.status(401).json({ message: 'User not found' });
-        }
-        const payload = { ...req.body };
-        const updatedUser = await Users.update({firebaseSubscription: JSON.stringify(payload)}, { where: { id: user.id } } );
-        return res.json({ user: updatedUser, message: 'User has been subscribed.' });
-    } catch(err) {
-        return res.status(500).json({ message: 'Error in subscribe user' });
-    }
-}
-
 module.exports.updateFirebaseToken = async (req, res) => {
     try {
         const user = await Users.findByPk(req.params.id);

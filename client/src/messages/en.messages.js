@@ -33,7 +33,6 @@ const en = {
   navbar: {
     todo: 'Todo',
     todoList: 'Todo List',
-    users: 'Users',
     logout: 'Log Out'
   },
   todo: {

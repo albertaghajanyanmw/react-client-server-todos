@@ -29,7 +29,6 @@ if (process.env.REACT_APP_ENV_MODE === 'production') {
     });
 } else {
     service = axios.create({
-        // baseURL: `http://localhost:3000/api/`,
         baseURL: `http://localhost:4000/api/`,
         timeout: 60000,
     });
@@ -48,7 +47,8 @@ const setupInterceptors = (reactRouterHistory) => {
       if (error.response &&
           error.response.data &&
           error.response.data.error &&
-          (error.response.data.error.message === 'User is not authenticated.' || error.response.data.error.message === 'No auth token')) {
+          (error.response.data.error.message === 'User is not authenticated.' ||
+          error.response.data.error.message === 'No auth token')) {
         onUnauthorized(error, reactRouterHistory);
         return Promise.reject(error);
       }

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import cookie from 'react-cookies';
 
 import { Route, Redirect, useHistory } from 'react-router-dom';
@@ -18,7 +17,6 @@ const useStyles = makeStyles(styles);
 function PrivateRoute({ component: Component, ...rest }) {
   const classes = useStyles();
   const currentUser = isLoggedIn();
-  const dispatch = useDispatch();
 
   const history = useHistory();
   const [loading, setLoading] = useState(true);
@@ -30,15 +28,13 @@ function PrivateRoute({ component: Component, ...rest }) {
       timer = setTimeout(() => askForPermissionToReceiveNotifications(), 5000);
     }
     return () => {
-      return () => clearTimeout(timer);
+      clearTimeout(timer);
     };
   }, [currentUser]);
 
   useEffect(() => {
     const navigateToLogin = () => {
-      history.push({
-        pathname: '/login',
-      });
+      history.push({ pathname: '/login' });
     };
 
     if (!currentUser) {
@@ -50,8 +46,9 @@ function PrivateRoute({ component: Component, ...rest }) {
     } else {
       setLoading(false);
     }
-  }, [currentUser, dispatch, history]);
+  }, [currentUser, history]);
 
+  // todo add Loading component
   if (loading) return <div className={classes.loadingRoot}>... Loading</div>;
 
   return (
