@@ -1,0 +1,16 @@
+{
+  "login": "auth/login",
+  "loginGuest": "auth/login/guest",
+  "register": "auth/register",
+  "registerGuest": "auth/register/guest",
+  "users": "users",
+  "user": "user/:userId",
+  "updateFirebaseToken": "/users/:userId/firebase/token",
+  "todos": "tasks",
+  "allTodos": "tasks/all",
+  "todo": "tasks/:todoId",
+  "createTodo": "tasks",
+  "updateTodo": "tasks/:todoId",
+  "deleteTodo": "tasks/:todoId",
+  "reminderTodo": "tasks/reminder/:todoId"
+}
