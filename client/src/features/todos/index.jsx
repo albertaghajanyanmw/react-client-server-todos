@@ -18,7 +18,7 @@ import { dateFormat, getMessage } from 'helpers/helper';
 import { adaptTodoTableData } from 'helpers/adapter';
 
 import { askForPermissionToReceiveNotifications } from 'firebase/pushNotification';
-import PageTitle from './PageTitle';
+import PageTitle from 'components/pageTitle';
 import {
   fetchTodoList,
   updateFilterStatus,

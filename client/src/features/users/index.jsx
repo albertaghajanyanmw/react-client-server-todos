@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import toast from 'react-hot-toast';
 
@@ -10,8 +10,9 @@ import M from 'messages';
 import CircularLoading from 'components/loading/Loading';
 import User from './user/user';
 import styles from './styles';
+import PageTitle from 'components/pageTitle';
 
-const UsersPage = () => {
+const UsersPage = ({ title }) => {
   const useStyles = makeStyles(styles);
   const classes = useStyles();
   const [usersData, setUsersData] = useState({ count: 0, data: [] });
@@ -45,10 +46,11 @@ const UsersPage = () => {
     <CircularLoading />
   ) : (
     <div className={classes.content}>
-      <div className={classes.toolbar} />
-      <Grid m={2} spacing={2} container className={classes.itemsContent}>
+      <PageTitle>{M.get(title)}</PageTitle>
+
+      <Grid mt={2} spacing={3} container className={classes.itemsContent}>
         {usersData.data.map((user) => (
-          <Grid className={classes.mGrid} key={user.id} item xs={12} sm={6} md={4} lg={3}>
+          <Grid key={user.id} item xs={12} sm={6} md={4} lg={3}>
             <User user={user} />
           </Grid>
         ))}

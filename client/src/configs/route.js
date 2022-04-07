@@ -21,6 +21,7 @@ const routes = {
   },
   users: {
     path: '/users',
+    title: 'pages.users'
   },
   todo: {
     path: '/todo',

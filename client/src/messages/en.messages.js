@@ -1,4 +1,7 @@
 const en = {
+  pages: {
+    users: 'All users list',
+  },
   login: {
     title: 'Sign in',
     email: 'Email',

@@ -2,12 +2,9 @@
 export default () => ({
   content: {
     display: 'flex',
-    width: '100%',
     flexDirection: 'column',
     alignItems: 'center',
-  },
-  mGrid: {
-    margin: 10,
+    padding: 20
   },
   itemsContent: {
     display: 'flex',

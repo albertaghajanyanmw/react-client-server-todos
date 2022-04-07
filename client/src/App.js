@@ -38,7 +38,7 @@ function App() {
               <Route path={routes.registration.path} exact component={RegistrationPage} />
               <Route path={routes.registrationGuest.path} exact component={RegistrationPage} />
               <PrivateRoute exact path={routes.home.path} component={UsersPage} />
-              <PrivateRoute exact path={routes.users.path} component={UsersPage} />
+              <PrivateRoute exact path={routes.users.path} title={routes.users.title} component={UsersPage} />
               <PrivateRoute exact path={routes.todo.path} component={TodoList} />
               {/* TODO create not found page*/}
               <PrivateRoute path="**" component={() => (<>Not found</>)}/>
