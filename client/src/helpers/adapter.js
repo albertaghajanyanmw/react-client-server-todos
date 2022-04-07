@@ -1,6 +1,6 @@
 import { dateFormat } from "./helper";
 
-const createUsersTableData = (id, firstName, lastName, nickName, email, image) => ({ id, firstName, lastName, nickName, email, image });
+const createUsersTableData = (id, firstName, lastName, nickName, email, image, firebaseToken) => ({ id, firstName, lastName, nickName, email, image, firebaseToken });
 
 const adaptUsersTableData = (data) => {
   const dataList = [];
@@ -12,7 +12,8 @@ const adaptUsersTableData = (data) => {
         item.lastName,
         item.nickName,
         item.email,
-        item.image
+        item.image,
+        item.firebaseToken
       )
     );
   });
@@ -31,6 +32,7 @@ const adaptTodoTableData = (data) => {
         item.estimatedDate ? dateFormat(item.estimatedDate, 'DD/MM/YYYY, HH:mm') : '-',
         item.estimatedDate,
         item.status,
+        item.user.email || item.user.nickName,
         item.user.email || item.user.nickName,
       )
     );

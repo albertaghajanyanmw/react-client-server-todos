@@ -14,7 +14,7 @@ module.exports.getUsers = async (req, res) => {
             return response
             .status(500)
             .json(
-                responseBuilder.couldNotGetCriteria(CONSTANTS.TypeNames.USERS.toLowerCase())
+                responseBuilder.couldNotGet(CONSTANTS.TypeNames.USERS.toLowerCase())
             );
         });
 };

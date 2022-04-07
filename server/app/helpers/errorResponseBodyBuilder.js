@@ -1,41 +1,41 @@
 const util = require('util');
 const {CONSTANTS} = require('../constants/Constants');
 
-module.exports.couldNotGetCriteria = (criteriaType, value = '') => {
-    return criteria(CONSTANTS.ErrorMessages.COULD_NOT_GET, criteriaType, value);
+module.exports.couldNotGet = (modelName, value = '') => {
+    return errorBuilder(CONSTANTS.ErrorMessages.COULD_NOT_GET, modelName, value);
 };
 
-module.exports.couldNotAddCriteria = (criteriaType, value = '') => {
-    return criteria(CONSTANTS.ErrorMessages.COULD_NOT_ADD, criteriaType, value);
+module.exports.couldNotAdd = (modelName, value = '') => {
+    return errorBuilder(CONSTANTS.ErrorMessages.COULD_NOT_ADD, modelName, value);
 };
 
-module.exports.couldNotUpdateCriteria = (criteriaType, value = '') => {
-    return criteria(CONSTANTS.ErrorMessages.COULD_NOT_UPDATE, criteriaType, value);
+module.exports.couldNotUpdate = (modelName, value = '') => {
+    return errorBuilder(CONSTANTS.ErrorMessages.COULD_NOT_UPDATE, modelName, value);
 };
 
-module.exports.couldNotDeleteCriteria = (criteriaType, value = '') => {
-    return criteria(CONSTANTS.ErrorMessages.COULD_NOT_DELETE, criteriaType, value);
+module.exports.couldNotDelete = (modelName, value = '') => {
+    return errorBuilder(CONSTANTS.ErrorMessages.COULD_NOT_DELETE, modelName, value);
 };
 
-module.exports.alreadyExistsCriteria = (criteriaType, value = '') => {
-    return criteria(CONSTANTS.ErrorMessages.ALREADY_EXISTS, value, criteriaType);
+module.exports.alreadyExists = (modelName, value = '') => {
+    return errorBuilder(CONSTANTS.ErrorMessages.ALREADY_EXISTS, value, modelName);
 };
 
-module.exports.doesNotExistCriteria = (criteriaType, value = '') => {
-    return criteria(CONSTANTS.ErrorMessages.DOES_NOT_EXSTS, criteriaType, value);
+module.exports.doesNotExist = (modelName, value = '') => {
+    return errorBuilder(CONSTANTS.ErrorMessages.DOES_NOT_EXSTS, modelName, value);
 };
 
 module.exports.addErrorMsg = msg => {
-    return criteria(msg, '', '');
+    return errorBuilder(msg, '', '');
 };
 
-module.exports.internalServerError = (criteriaType, value = '') => {
-    return criteria('', criteriaType, value);
+module.exports.internalServerError = (modelName, value = '') => {
+    return errorBuilder('', modelName, value);
 };
 
-const criteria = (errorTypeMsg, criteriaType, value = '') => {
+const errorBuilder = (errorTypeMsg, modelName, value = '') => {
     return {
         success: false,
-        message: `${util.format(errorTypeMsg, criteriaType, value)}`
+        message: `${util.format(errorTypeMsg, modelName, value)}`
     };
 };

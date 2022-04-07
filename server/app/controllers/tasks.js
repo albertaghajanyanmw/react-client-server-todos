@@ -16,7 +16,7 @@ module.exports.getAllTasks = async (req, res) => {
     } catch(err) {
         return res
             .status(500)
-            .json(responseBuilder.couldNotGetCriteria(CONSTANTS.TypeNames.TASKS.toLowerCase()));
+            .json(responseBuilder.couldNotGet(CONSTANTS.TypeNames.TASKS.toLowerCase()));
     }
 };
 
@@ -29,7 +29,7 @@ module.exports.getTasks = async (req, res) => {
     } catch(err) {
         return res
             .status(500)
-            .json(responseBuilder.couldNotGetCriteria(CONSTANTS.TypeNames.TASKS.toLowerCase()));
+            .json(responseBuilder.couldNotGet(CONSTANTS.TypeNames.TASKS.toLowerCase()));
     }
 };
 
@@ -40,7 +40,7 @@ module.exports.getTask = async (req, res) => {
     } catch {
         return res
         .status(500)
-        .json(responseBuilder.couldNotGetCriteria(CONSTANTS.TypeNames.TASK.toLowerCase()));
+        .json(responseBuilder.couldNotGet(CONSTANTS.TypeNames.TASK.toLowerCase()));
     }
 };
 
@@ -69,7 +69,7 @@ module.exports.create = async (req, res) => {
         }
         return res
             .status(500)
-            .json(responseBuilder.couldNotAddCriteria(CONSTANTS.TypeNames.TASK.toLowerCase()));
+            .json(responseBuilder.couldNotAdd(CONSTANTS.TypeNames.TASK.toLowerCase()));
     }
 };
 
@@ -90,7 +90,7 @@ module.exports.update = async (req, res) => {
     } catch(err) {
         return res
             .status(500)
-            .json(responseBuilder.couldNotUpdateCriteria(CONSTANTS.TypeNames.TASK.toLowerCase()));
+            .json(responseBuilder.couldNotUpdate(CONSTANTS.TypeNames.TASK.toLowerCase()));
     }
 };
 

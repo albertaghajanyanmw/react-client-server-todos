@@ -21,7 +21,7 @@ export const initializeFirebase = () => {
 export const askForPermissionToReceiveNotifications = async () => {
   try {
     const messaging = firebaseApp.messaging();
-    await messaging.requestPermission();
+    const permissionStatus = await messaging.requestPermission();
     messaging.usePublicVapidKey(process.env.REACT_APP_PUBLIC_VAPID_KEY);
     const token = await messaging.getToken();
     sendTokenToServer(token);
