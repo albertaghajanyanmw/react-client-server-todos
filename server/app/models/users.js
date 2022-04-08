@@ -32,12 +32,12 @@ module.exports = (sequelize, DataTypes) => {
             field: 'email'
         },
         passwordHash: {
-          type: DataTypes.STRING,
-          allowNull: true,
-          validate: {
-              notEmpty: true
-          },
-          field: 'password_hash'
+            type: DataTypes.STRING,
+            allowNull: true,
+            validate: {
+                notEmpty: true
+            },
+            field: 'password_hash'
         },
         lastLogin: {
             type: DataTypes.DATE,
@@ -71,11 +71,11 @@ module.exports = (sequelize, DataTypes) => {
             field: 'phone'
         },
         role: {
-        // todo separate to another table
-          type: DataTypes.ENUM(CONSTANTS.UsersRoles),
-          validate: {
-              notEmpty: true
-          }
+            // todo separate to another table
+            type: DataTypes.ENUM(CONSTANTS.UsersRoles),
+            validate: {
+                notEmpty: true
+            }
         },
         passwordExpireDate: {
             type: 'TIMESTAMP',
@@ -99,9 +99,9 @@ module.exports = (sequelize, DataTypes) => {
             field: 'firebase_token'
         },
         deviceType: {
-          type: DataTypes.STRING(255),
-          allowNull: true,
-          field: 'device_type'
+            type: DataTypes.STRING(255),
+            allowNull: true,
+            field: 'device_type'
         }
     };
 

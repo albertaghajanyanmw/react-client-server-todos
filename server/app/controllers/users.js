@@ -10,7 +10,7 @@ module.exports.getUsers = async (req, res) => {
         .then(({ count, rows }) => {
             return res.json({ count, data: rows });
         })
-        .catch((err) => {
+        .catch(() => {
             return response
             .status(500)
             .json(
@@ -24,7 +24,7 @@ module.exports.getUser = async (req, res) => {
         .then((user) => {
             return res.json(user);
         })
-        .catch((err) => {
+        .catch(() => {
             return res.status(500).json({ message: 'Error in get user' });
         });
 };
