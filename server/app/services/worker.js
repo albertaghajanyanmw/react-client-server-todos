@@ -43,11 +43,13 @@ const checkExpiredTasks = async () => {
     }
 };
 
+const INTERVAL = 300000;
+
 const start = async () => {
     console.log("\n\n\n...Worker started")
     return setInterval(async () => {
         await checkExpiredTasks();
-    }, 60000000);
+    }, INTERVAL);
 };
 
 module.exports = {
