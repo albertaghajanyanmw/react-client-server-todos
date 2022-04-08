@@ -1,7 +1,7 @@
 
 export default () => ({
   root: {
-    padding: '10px 10px 10px 22px',
+    padding: '10px 10px 10px 24px',
     textAlign: 'start',
     justifyContent: 'space-between',
     minHeight: 40,
