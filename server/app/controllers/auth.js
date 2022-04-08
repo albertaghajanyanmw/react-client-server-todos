@@ -13,6 +13,9 @@ const login = async (request, user) => {
         if(!user) {
             return {success: false, status: 401, message: 'Unauthorized'};
         }
+        if(!user.isActive) {
+            return {success: false, status: 403, message: 'Forbidden. Your account is not activated'};
+        }
         const validPassword = await crypt.compare(request.body.password, user.passwordHash);
         if(!validPassword) {
             return {success: false, status: 401, message: 'Unauthorized'};
@@ -40,7 +43,7 @@ const login = async (request, user) => {
 
 module.exports.postLogin = async (request, response) => {
     try {
-        const user = await Users.findOne({where: { email: request.body.email, isActive: true }});
+        const user = await Users.findOne({where: { email: request.body.email }});
         const result = await login(request, user);
         if(!result.success) {
             return response.status(result.status).json({message: result.message});

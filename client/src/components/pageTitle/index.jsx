@@ -15,7 +15,11 @@ function PageTitle({ children, ...rest }) {
 }
 
 PageTitle.propTypes = {
-  children: PropTypes.string.isRequired
+  children: PropTypes.string
+}
+
+PageTitle.defaultValue = {
+  children: ''
 }
 
 export default memo(PageTitle);
