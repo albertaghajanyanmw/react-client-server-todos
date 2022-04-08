@@ -20,16 +20,10 @@ export default {
       data
     };
     return post(options).then(result => {
-      cookie.save(AUTH_TOKEN, result.data.token, {
-          path: '/',
-          maxAge: 86400
-      });
+      cookie.save(AUTH_TOKEN, result.data.token, { path: '/', maxAge: 86400 });
       return result;
     }).catch(error => {
-      const message = error.response && (error.response.status === 401 || error.response.status === 400)
-          ? {description: 'Login error'}
-          : error;
-      return Promise.reject(message);
+      return Promise.reject(error);
     });
   },
   register: async (data) => {

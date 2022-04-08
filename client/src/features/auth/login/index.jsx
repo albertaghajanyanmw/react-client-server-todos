@@ -10,6 +10,7 @@ import M from 'messages';
 import AuthService from 'services/authService';
 import lsConstants from 'constants/local-storage';
 import CustomForm from 'components/form';
+import { getMessage } from 'helpers/helper';
 import { routes } from 'configs';
 import { userValidationSchema, guestValidationSchema } from './validation';
 import { formOptions } from './config/config';
@@ -34,7 +35,7 @@ const LoginPage = () => {
         localStorage.setItem(lsConstants.CURRENT_USER, JSON.stringify(result.data));
         history.push(routes.todo.path);
       } catch (err) {
-        toast.error(M.get('login.errors.common'));
+        toast.error(getMessage(err?.response?.data, 'error'));
       }
     },
   });

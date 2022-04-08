@@ -65,10 +65,7 @@ const todoSlice = createSlice({
   reducers: {
     updateFilterStatus: (state, action) => {
       state.filterStatus = action.payload;
-      let newFilter = {};
-      if (action.payload !== 'all') {
-        newFilter = {'status': action.payload};
-      }
+      const newFilter = action.payload === 'all' ? {} : {'status': action.payload};
       state.params.params.filter = newFilter;
       state.params.params.skip = 0;
       state.status = 'waiting';
