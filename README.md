@@ -7,6 +7,13 @@ TODO
 ### 2. Install and run guide for development mode.
 ------------------------------
 #### Install all requirements in both parts (client, server)
+##### Requirements
+* Node: v16.13.0 or later
+* Instal MySQL and create database <db_name>
+    * Update credentials in server/.env file
+        * DB_USERNAME=<username>
+        * DB_PASSWORD=<password>
+        * DB_DATABASE=<db_name>
 #### server
 ```
 cd server
@@ -85,7 +92,7 @@ CLIENT_URL=
 
 DB_USERNAME=
 DB_PASSWORD=
-DB_DATABASE=" "
+DB_DATABASE=
 DB_HOST=127.0.0.1
 DB_DIALECT=mysql
 DB_PORT=3306
